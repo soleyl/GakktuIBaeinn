@@ -1,0 +1,49 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.survey"
+    >
+
+    <!-- Here is where we will show each question of the survey -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/survey_question_text_view"
+        android:text="@string/hello_blank_fragment"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/survey_yes_button"
+        android:text="@string/survey_yes_button_text"
+        android:background="@color/yes"
+        android:layout_below="@id/survey_question_text_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/survey_no_button"
+        android:text="@string/survey_no_button_text"
+        android:layout_below="@id/survey_yes_button"
+        android:layout_centerHorizontal="true"
+        android:background="@color/no"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/survey_skip_button"
+        android:text="@string/survey_skip_button_text"
+        android:layout_below="@id/survey_no_button"
+        android:layout_centerHorizontal="true"
+        android:background="@color/skip"
+        />
+
+</RelativeLayout>

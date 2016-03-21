@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="info.androidhive.materialdesign.activity.HomeFragment">
+    tools:context="info.androidhive.materialdesign.activity.HomeFragment"
+    >
 
 
     <TextView
@@ -22,9 +23,31 @@
         android:layout_centerInParent="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="12dp"
+        android:textSize="20dp"
         android:layout_marginTop="10dp"
         android:gravity="center_horizontal"
-        android:text="Edit fragment_home.xml to change the appearance" />
+        android:id="@+id/announcement1"
+        android:text="announcement 1 here" />
 
+    <TextView
+        android:layout_below="@id/announcement1"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/announcement2"
+        android:text="announcement 2 here" />
+
+    <TextView
+        android:layout_below="@id/announcement2"
+        android:layout_centerInParent="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:id="@+id/announcement3"
+        android:text="announcement 3 here" />
 </RelativeLayout>

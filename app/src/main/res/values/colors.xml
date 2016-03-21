@@ -15,5 +15,8 @@
     <color name="windowBackground">#d9d8ba</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#bff0e7</color>
+    <color name="yes">#30A591</color>
+    <color name="no">#FF6D4B</color>
+    <color name="skip">#FFBE4B</color>
 
 </resources>
