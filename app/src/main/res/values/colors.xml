@@ -16,7 +16,7 @@
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#bff0e7</color>
     <color name="yes">#30A591</color>
-    <color name="no">#FF6D4B</color>
-    <color name="skip">#FFBE4B</color>
+    <color name="no">#FF715B</color>
+    <color name="skip">#FFCE5B</color>
 
 </resources>

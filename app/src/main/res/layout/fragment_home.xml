@@ -6,11 +6,10 @@
     tools:context="info.androidhive.materialdesign.activity.HomeFragment"
     >
 
-
     <TextView
         android:id="@+id/label"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -18,36 +17,84 @@
         android:text="HOME"
         android:textStyle="bold"/>
 
-    <TextView
-        android:layout_below="@id/label"
-        android:layout_centerInParent="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:id="@+id/announcement1"
-        android:text="announcement 1 here" />
+    <!-- ////////////////// Announcement 1 /////////////////// -->
 
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_home_1"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="10dp"
+        android:layout_below="@id/label"
+        card_view:cardBackgroundColor="@color/colorAccent">
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:id="@+id/announcement1"
+            android:text="announcement 1 here" />
+    </android.support.v7.widget.CardView>
+
+    <!-- End Announcement1  -->
+
+
+    <!-- ////////////////// Announcement 2 /////////////////// -->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_home_2"
+        android:layout_below="@id/card_view_home_1"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardBackgroundColor="@color/colorAccent">
     <TextView
-        android:layout_below="@id/announcement1"
         android:layout_centerInParent="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textSize="20dp"
         android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:id="@+id/announcement2"
         android:text="announcement 2 here" />
+    </android.support.v7.widget.CardView>
 
+    <!-- End Announcement2  -->
+
+
+    <!-- ////////////////// Announcement3 /////////////////// -->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view_home_3"
+        android:layout_below="@id/card_view_home_2"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardBackgroundColor="@color/colorAccent">
     <TextView
-        android:layout_below="@id/announcement2"
         android:layout_centerInParent="true"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textSize="20dp"
         android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:id="@+id/announcement3"
         android:text="announcement 3 here" />
+    </android.support.v7.widget.CardView>
+
+    <!-- End Announcement3  -->
 </RelativeLayout>

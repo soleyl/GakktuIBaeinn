@@ -7,28 +7,54 @@
 
     <string name="nav_item_home">Home</string>
     <string name="nav_item_friends">Friends</string>
-    <string name="nav_item_notifications">Messages</string>
+    <string name="nav_item_profile">Profile</string>
+    <string name="nav_item_survey">Survey</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
-        <item>@string/nav_item_friends</item>
-        <item>@string/nav_item_notifications</item>
+        <item>@string/nav_item_survey</item>
+        <item>@string/nav_item_profile</item>
     </string-array>
-    <string name="title_messages">Messages</string>
-    <string name="title_friends">Friends</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_survey">Survey</string>
     <string name="title_home">Home</string>
-    <!-- Text Labels for Buttons in Survey Fragment -->
+
+    <!-- Strings related to the Home Fragment -->
+    <string name="text_announcement1_not_started">Curiosity killed the cat, but we don\'t care. We want to know all about you!
+        Please complete our Survey.</string>
+    <string name="text_announcement1_started">We like what we know so far. But tell us more! Finish
+        our Survey to enhance your experience. </string>
+    <string name="text_announcement1_completed">Thanks for completing the survey. It\'s like we\'re
+        soulmates.  We know you so well. But if things change, you can retake our survey at anytime
+        and update your profile.</string>
+    <string name="survey_not_started_status">notStarted</string>
+    <string name="survey_started_status">started</string>
+    <string name="survey_completed_status">completed</string>
+
+    <!-- Strings related to the Survey Fragment -->
     <string name="survey_yes_button_text">Yes</string>
     <string name="survey_no_button_text">No</string>
     <string name="survey_skip_button_text">Skip</string>
-    <!-- Text of the Questions for the Survey Activity -->
     <string name="survey_question_children">Do you have any children?</string>
     <string name="survey_question_employed">Are you currently employed?</string>
     <string name="survey_question_disabled">Are you (or a family member) disabled?</string>
     <string name="survey_question_citizenship">Are you interested in a path to Icelandic citizenship?</string>
+    <string name="end_of_survey_message">Thank you for your participation. This concludes our survey.</string>
+    <string name="end_of_survey_nav_text">View Profile Here</string>
+    <string name="key_sp_survey_status">surveyStatus</string>
+    <string name="preference_name_children">Children:</string>
+    <string name="preference_name_employed">Employment:</string>
+    <string name="preference_name_disabled">Disability:</string>
+    <string name="preference_name_citizenship">Citizenship:</string>
+
     <!-- Strings for interacting with SharedPreferences -->
     <string name="userProfilePreferences">userProfilePreferences</string>
+
+    <!-- Strings for Profile Fragment -->
+    <string name="profile_title_text">YOUR PROFILE</string>
+    <string name="user_pref_children_label_text">Children:</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     mentor_link_button_text
