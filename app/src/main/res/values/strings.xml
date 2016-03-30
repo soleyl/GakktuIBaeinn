@@ -6,7 +6,7 @@
     <string name="drawer_close">Close</string>
 
     <string name="nav_item_home">Home</string>
-    <string name="nav_item_friends">Friends</string>
+    <string name="nav_item_articles">Articles</string>
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_survey">Survey</string>
 
@@ -15,10 +15,12 @@
         <item>@string/nav_item_home</item>
         <item>@string/nav_item_survey</item>
         <item>@string/nav_item_profile</item>
+        <item>@string/nav_item_articles</item>
     </string-array>
     <string name="title_profile">Profile</string>
     <string name="title_survey">Survey</string>
     <string name="title_home">Home</string>
+    <string name="title_articles">Articles</string>
 
     <!-- Strings related to the Home Fragment -->
     <string name="text_announcement1_not_started">Curiosity killed the cat, but we don\'t care. We want to know all about you!
