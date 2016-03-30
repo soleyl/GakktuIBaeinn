@@ -9,16 +9,20 @@
     <string name="nav_item_friends">Friends</string>
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_survey">Survey</string>
+    <string name="nav_item_mentors">Mentors</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
         <item>@string/nav_item_survey</item>
         <item>@string/nav_item_profile</item>
+        <item>@string/nav_item_mentors</item>
+
     </string-array>
     <string name="title_profile">Profile</string>
     <string name="title_survey">Survey</string>
     <string name="title_home">Home</string>
+    <string name="title_mentors">Mentors</string>
 
     <!-- Strings related to the Home Fragment -->
     <string name="text_announcement1_not_started">Curiosity killed the cat, but we don\'t care. We want to know all about you!

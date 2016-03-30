@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="info.androidhive.materialdesign.activity.MentorsFragment">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="45dp"
+        android:text="MENTORS"
+        android:textStyle="bold"/>
+    <!-- A RecyclerView with some commonly used attributes -->
+    <ListView
+        android:id="@+id/mentor_list_view"
+        android:scrollbars="vertical"
+        android:layout_below="@id/label"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>
