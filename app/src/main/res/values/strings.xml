@@ -9,18 +9,28 @@
     <string name="nav_item_articles">Articles</string>
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_survey">Survey</string>
+    <string name="nav_item_mentors">Mentors</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/nav_item_home</item>
         <item>@string/nav_item_survey</item>
         <item>@string/nav_item_profile</item>
+<<<<<<< HEAD
         <item>@string/nav_item_articles</item>
+=======
+        <item>@string/nav_item_mentors</item>
+
+>>>>>>> e4fe7c9aa10ddbe15d9402c9ff00a47e7db4ad55
     </string-array>
     <string name="title_profile">Profile</string>
     <string name="title_survey">Survey</string>
     <string name="title_home">Home</string>
+<<<<<<< HEAD
     <string name="title_articles">Articles</string>
+=======
+    <string name="title_mentors">Mentors</string>
+>>>>>>> e4fe7c9aa10ddbe15d9402c9ff00a47e7db4ad55
 
     <!-- Strings related to the Home Fragment -->
     <string name="text_announcement1_not_started">Curiosity killed the cat, but we don\'t care. We want to know all about you!
