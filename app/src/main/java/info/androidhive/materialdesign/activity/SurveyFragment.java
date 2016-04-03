@@ -172,7 +172,6 @@ public class SurveyFragment extends Fragment {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ProfileFragment profileFrag = new ProfileFragment();
 
-                //fragmentTransaction.add(R.id.container_body, profileFrag);
                 fragmentTransaction.replace(R.id.container_body,profileFrag);
                 fragmentTransaction.commit();
 

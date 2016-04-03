@@ -5,11 +5,13 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
+    <!-- navigation drawer: file names to link to  -->
     <string name="nav_item_home">Home</string>
     <string name="nav_item_friends">Friends</string>
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_survey">Survey</string>
     <string name="nav_item_mentors">Mentors</string>
+    <string name="nav_item_write_article">WriteArticle</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -17,14 +19,18 @@
         <item>@string/nav_item_survey</item>
         <item>@string/nav_item_profile</item>
         <item>@string/nav_item_mentors</item>
+        <item>@string/nav_item_write_article</item>
 
+        <!-- navigation drawer item Titles  -->
     </string-array>
     <string name="title_profile">Profile</string>
     <string name="title_survey">Survey</string>
     <string name="title_home">Home</string>
     <string name="title_mentors">Mentors</string>
+    <string name="title_write_article">Write An Article</string>
 
     <!-- Strings related to the Home Fragment -->
+    <string name="homeTitleDisplay">Gakktu í Bæinn</string>
     <string name="text_announcement1_not_started">Curiosity killed the cat, but we don\'t care. We want to know all about you!
         Please complete our Survey.</string>
     <string name="text_announcement1_started">We like what we know so far. But tell us more! Finish
@@ -45,15 +51,30 @@
     <string name="survey_question_disabled">Are you (or a family member) disabled?</string>
     <string name="survey_question_citizenship">Are you interested in a path to Icelandic citizenship?</string>
     <string name="end_of_survey_message">Thank you for your participation. This concludes our survey.</string>
-    <string name="end_of_survey_nav_text">View Profile Here</string>
+    <string name="end_of_survey_nav_text">View Profile</string>
     <string name="key_sp_survey_status">surveyStatus</string>
     <string name="preference_name_children">Children:</string>
     <string name="preference_name_employed">Employment:</string>
     <string name="preference_name_disabled">Disability:</string>
     <string name="preference_name_citizenship">Citizenship:</string>
 
+    <!-- Strings related to the WriteArticle Fragment -->
+    <string name="write_article_instruction_title_text">Title Your Article</string>
+    <string name="write_article_instruction_body_text">Compose Article</string>
+    <string name="write_article_instruction_confirm_text">Confirm and Save</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Strings related to the ConfirmArticle Fragment -->
+    <string name="confirm">Confirm</string>
+    <string name="edit">Edit</string>
+    <string name="discard">Discard</string>
+    <string name="article_to_confirm_title_text">User\'s Title Here</string>
+    <string name="article_to_confirm_body_text">User\'s Text Body Here</string>
+
     <!-- Strings for interacting with SharedPreferences -->
     <string name="userProfilePreferences">userProfilePreferences</string>
+    <string name="locallyStoredArticle">localArticle</string>
 
     <!-- Strings for Profile Fragment -->
     <string name="profile_title_text">YOUR PROFILE</string>
