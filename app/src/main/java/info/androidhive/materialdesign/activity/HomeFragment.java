@@ -112,14 +112,12 @@ public class HomeFragment extends Fragment {
         mannouncement1TextView = (TextView) rootView.findViewById(R.id.announcement1);
         setAnnouncement1();
 
-        /* COMMENTING THIS OUT UNTIL WE FIX THE SERVER CONNECTION
+        //COMMENTING THIS OUT UNTIL WE FIX THE SERVER CONNECTION
 
         //Display 2nd announcement.  Just testing a server connection w gender now.
         mannouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
         AsyncTask task = new FetchGendersTask();
         task.execute();
-        */
-
 
         // Inflate the layout for this fragment
         return rootView;
