@@ -24,7 +24,8 @@ import android.widget.Toast;
 public class WriteArticleFragment extends Fragment {
 
     private TextView mWriteArticleInstructions;
-    private EditText mWriteArticleEditText;
+    private EditText mWriteArticleEditTitle;
+    private EditText mWriteArticleEditBody;
     private Button mSaveButton;
     private Button mCancelButton;
     private int mCurrentPhase=0;
@@ -43,41 +44,20 @@ public class WriteArticleFragment extends Fragment {
 
     }
 
-    public void saveTitle(){
-
+    public void saveArticleLocally(){
         //Get Title from User's input
-        String articleTitle = mWriteArticleEditText.getText().toString();
+        String articleTitle = mWriteArticleEditTitle.getText().toString();
+        //Get Body from User's input
+        String articleBody = mWriteArticleEditBody.getText().toString();
 
-        //Save Title locally in SharedPreferences
+        //Save data locally in SharedPreferences
         SharedPreferences prefs = getActivity().getSharedPreferences(
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         String key = "title";
+        String key2= "body";
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, articleTitle)
-                .apply();
-
-        //Update to next View
-        mWriteArticleInstructions.setText(R.string.write_article_instruction_body_text);
-        mWriteArticleEditText.setText("");
-
-        //If User is returning to Edit a locally stored article, fetch the data
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(
-                getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
-        String localStoredArticleBody = sharedPref.getString("body", null);
-        if (localStoredArticleBody != null){ mWriteArticleEditText.setText(localStoredArticleBody);}
-    }
-
-    public void saveBody(){
-
-        //Get Body from User's input
-        String articleBody = mWriteArticleEditText.getText().toString();
-
-        //Save Body locally in SharedPreferences
-        SharedPreferences prefs = getActivity().getSharedPreferences(
-                getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
-        String key = "body";
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, articleBody)
+                .putString(key2,articleBody)
                 .apply();
 
         //Move to a ConfirmArticle Fragment
@@ -89,36 +69,55 @@ public class WriteArticleFragment extends Fragment {
 
     }
 
+    /*
+    public void saveTitle(){
+
+        //If User is returning to Edit a locally stored article, fetch the data
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
+        String localStoredArticleBody = sharedPref.getString("body", null);
+        if (localStoredArticleBody != null){ mWriteArticleEditText.setText(localStoredArticleBody);}
+    }
+
+    public void saveBody(){
+
+
+        //Move to a ConfirmArticle Fragment
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        ConfirmArticleFragment confirmFrag = new ConfirmArticleFragment();
+        fragmentTransaction.replace(R.id.container_body,confirmFrag);
+        fragmentTransaction.commit();
+
+    }*/
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_write_article, container, false);
 
-        mWriteArticleInstructions = (TextView) rootView.findViewById(R.id.write_article_instructions);
-        mWriteArticleEditText = (EditText) rootView.findViewById(R.id.write_article_input_field);
+        //mWriteArticleInstructions = (TextView) rootView.findViewById(R.id.write_article_instructions);
+        mWriteArticleEditTitle = (EditText) rootView.findViewById(R.id.write_article_input_field_title);
+        mWriteArticleEditBody = (EditText) rootView.findViewById(R.id.write_article_input_field_body);
 
         //If User is returning to Edit a locally-stored article, fetch the article data
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         String localStoredArticleTitle = sharedPref.getString("title", null);
-        //Display the old Title so User can edit it.
-        if (localStoredArticleTitle != null){ mWriteArticleEditText.setText(localStoredArticleTitle);}
+        String localStoredArticleBody = sharedPref.getString("body", null);
+        //Display the old Article data so User can edit it.
+        if (localStoredArticleTitle != null){ mWriteArticleEditTitle.setText(localStoredArticleTitle);}
+        if (localStoredArticleBody != null){ mWriteArticleEditBody.setText(localStoredArticleBody);}
 
         // ---------------------- SAVE BUTTON ------------------------------------------//
         mSaveButton = (Button) rootView.findViewById(R.id.write_article_save_button);
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phase = writingPhases[mCurrentPhase];
-                String t = phase + " Saved Locally";
+                saveArticleLocally();
+                String t = "Article Saved Locally";
                 Toast.makeText(getActivity(),t, Toast.LENGTH_SHORT).show();
-                if (phase=="Title") { saveTitle();}
-                if (phase=="Body") { saveBody();}
-
-                //Increment to next phase
-                mCurrentPhase+=1;
-
             }
         });
         // -----------------------------------------------------------------------------//

@@ -1,30 +1,39 @@
 package info.androidhive.materialdesign.model;
 
+import java.util.Date;
+
+
 /**
  * Created by troyporter on 4/2/16.
  */
 public class Article {
+    private String id;
     private String title;
-    private String body;
-    //private User author;
+    private Category category;
+    private Language language;
+    private String content;
+    private Person author;
+    private Date originalDate;
+    private int rating;
+    private int numberOfRatings;
 
-    private Article(){
+    public Article(){
 
     }
 
-    private void setTitle(String t){
+    public void setTitle(String t){
         title =t;
     }
 
-    private void setBody(String b){
-        body=b;
-    }
-
-    private String getTitle(){
+    public String getTitle(){
         return title;
     }
 
-    private String getBody(){
-        return body;
+    public void setContent(String c){
+        content=c;
+    }
+
+    public String getContent(){
+        return content;
     }
 }

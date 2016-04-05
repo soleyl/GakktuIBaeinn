@@ -5,11 +5,11 @@ package info.androidhive.materialdesign.model;
  */
 public class AccessToken {
 
-        public String access_token;
-        public String refresh_token;
-        public long expires_in;
-        public String token_type;
-        public String scope;
+        public String mAccess_token;
+        public String mRefresh_token;
+        public long mExpires_in;
+        public String mToken_type;
+        public String mScope;
 
     public AccessToken(){
 

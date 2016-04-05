@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment {
                 getString(R.string.userProfilePreferences), Context.MODE_APPEND);
         String surveyStatus =  sharedPref.getString(getString(R.string.key_sp_survey_status), getString(R.string.survey_not_started_status));
         String messageToDisplay="";
+        messageToDisplay = getString(R.string.text_announcement1_not_started);
 
         if (surveyStatus==getString(R.string.survey_started_status)){
             messageToDisplay = getString(R.string.text_announcement1_started);
@@ -64,14 +65,12 @@ public class HomeFragment extends Fragment {
         if (surveyStatus==getString(R.string.survey_completed_status)){
             messageToDisplay = getString(R.string.text_announcement1_completed);
         }
-        else{messageToDisplay = getString(R.string.text_announcement1_not_started);}
-        
+
         mannouncement1TextView.setText(messageToDisplay);
 
     }
 
     private void setAnnouncement2(List<Gender> genders){
-        Log.i(TAG, "inside setAnn2");
 
         final String nameToDisplay= genders.get(0).getName();
         int idToDisplay= genders.get(0).getId();
@@ -127,7 +126,6 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected List<Gender> doInBackground(Object... params){
-            Log.i(TAG, "background");
                 return new GenderFetcher().fetchGenders();
 
         }
@@ -137,7 +135,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(List<Gender> genders){
             mGenders = genders;
             Log.i(TAG, "inside execute");
-            setAnnouncement2(mGenders);
+            //setAnnouncement2(mGenders);
 
 
         }

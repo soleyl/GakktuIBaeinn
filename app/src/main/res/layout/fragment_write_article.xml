@@ -5,6 +5,7 @@
     tools:context="info.androidhive.materialdesign.activity.WriteArticleFragment">
 
     <!-- Instruction Panel -->
+    <!--
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/write_article_instructions_card"
@@ -19,6 +20,7 @@
         android:layout_below="@id/label"
         card_view:cardBackgroundColor="@color/colorPrimary"
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,21 +31,32 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/navigationBarColor"
             android:layout_marginBottom="10dp"/>
-    </android.support.v7.widget.CardView>
+    </android.support.v7.widget.CardView> -->
     <EditText
         android:layout_width="match_parent"
-        android:id="@+id/write_article_input_field"
+        android:id="@+id/write_article_input_field_title"
         android:layout_height="100dp"
-        android:layout_below="@id/write_article_instructions_card"
+        android:layout_below="@id/label"
         android:layout_marginLeft="10dp"
+        android:hint="@string/hint_article_title"
         android:inputType="textCapSentences"
+        android:layout_marginRight="10dp"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/write_article_input_field_body"
+        android:layout_height="100dp"
+        android:layout_below="@id/write_article_input_field_title"
+        android:layout_marginLeft="10dp"
+        android:hint="@string/hint_article_body"
+        android:inputType="textCapSentences|textMultiLine"
+        android:scrollHorizontally="false"
         android:layout_marginRight="10dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/write_article_save_button"
         android:text="@string/save"
-        android:layout_below="@id/write_article_input_field"
+        android:layout_below="@id/write_article_input_field_body"
         android:layout_alignParentRight="true"
         android:background="@color/yes"
         android:layout_marginBottom="10dp"
@@ -54,7 +67,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/write_article_cancel_button"
         android:text="@string/cancel"
-        android:layout_below="@id/write_article_input_field"
+        android:layout_below="@id/write_article_input_field_body"
         android:layout_alignParentLeft="true"
         android:background="@color/no"
         android:layout_marginBottom="10dp"

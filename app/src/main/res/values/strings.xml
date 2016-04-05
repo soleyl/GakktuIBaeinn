@@ -11,7 +11,7 @@
     <string name="nav_item_profile">Profile</string>
     <string name="nav_item_survey">Survey</string>
     <string name="nav_item_mentors">Mentors</string>
-    <string name="nav_item_write_article">WriteArticle</string>
+    <string name="nav_item_write_article">Write An Article</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -28,6 +28,7 @@
     <string name="title_home">Home</string>
     <string name="title_mentors">Mentors</string>
     <string name="title_write_article">Write An Article</string>
+    <string name="title_confirm_article">Confirm Your Article</string>
 
     <!-- Strings related to the Home Fragment -->
     <string name="homeTitleDisplay">Gakktu í Bæinn</string>
@@ -64,6 +65,9 @@
     <string name="write_article_instruction_confirm_text">Confirm and Save</string>
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="hint_article_title">Your Title Here</string>
+    <string name="hint_article_body">Your Content Here</string>
+
 
     <!-- Strings related to the ConfirmArticle Fragment -->
     <string name="confirm">Confirm</string>
