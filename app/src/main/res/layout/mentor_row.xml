@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/flag_image_View_3"
                 android:layout_margin="5dp"/>
-            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

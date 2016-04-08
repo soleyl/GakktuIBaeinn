@@ -14,6 +14,7 @@
         android:textSize="45dp"
         android:text="MENTORS"
         android:textStyle="bold"/>
+
     <!-- A RecyclerView with some commonly used attributes -->
     <ListView
         android:id="@+id/mentor_list_view"
