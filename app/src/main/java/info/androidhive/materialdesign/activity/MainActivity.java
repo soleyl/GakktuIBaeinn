@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 fragment = new MentorsFragment();
                 title = getString(R.string.title_mentors);
                 break;
-            case 4:
+            case 5:
                 fragment = new WriteArticleFragment();
                 title = getString(R.string.title_write_article);
             default:
