@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import info.androidhive.materialdesign.ArticleFetcher;
 import info.androidhive.materialdesign.R;
 import android.content.SharedPreferences;
 import android.widget.Toast;
@@ -116,6 +117,8 @@ public class WriteArticleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveArticleLocally();
+                ArticleFetcher test = new ArticleFetcher();
+                //test.uploadArticle();
                 String t = "Article Saved Locally";
                 Toast.makeText(getActivity(),t, Toast.LENGTH_SHORT).show();
             }

@@ -1,6 +1,6 @@
 package info.androidhive.materialdesign;
 
-import android.net.Uri;
+/*import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
@@ -8,9 +8,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayOutputStream;*/
+import android.util.Log;
+
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+/*import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
@@ -20,16 +28,51 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import android.util.Base64;
+import android.util.Base64;*/
+
+//import com.squareup.okhttp.OkHttpClient;
+//import com.squareup.okhttp.Request;
+//import com.squareup.okhttp.Response;
 
 import info.androidhive.materialdesign.model.AccessToken;
 import info.androidhive.materialdesign.model.Gender;
+
+
+public class GenderFetcher {
+    OkHttpClient client = new OkHttpClient();
+
+
+    String run(String url) throws IOException {
+        Request request = new Request.Builder().url(url).build();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
+
+    public List<Gender> get() throws IOException{
+        GenderFetcher genderFetcher = new GenderFetcher();
+        String response = genderFetcher.run("http://e260395e.ngrok.io/genders");
+        String TAG = "testingServer";
+        Log.e(TAG, response);
+        List<Gender>  l = new ArrayList<Gender>();
+        return l;
+
+    }
+
+    /*public static void main(String[] args) throws IOException {
+        GenderFetcher genderFetcher = new GenderFetcher();
+        String response = genderFetcher.run("http://e260395e.ngrok.io/genders");
+        String TAG = "ts from void main";
+        Log.e(TAG, response);
+    }*/
+}
+
 
 
 
 /**
  * Created by troyporter on 3/30/16.
  */
+/*
 public class GenderFetcher {
 
     private static final String TAG = "testing";
@@ -43,7 +86,7 @@ public class GenderFetcher {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             InputStream in = conn.getInputStream();
             if (conn.getResponseCode() != HttpURLConnection.HTTP_OK){
-                throw new IOException(conn.getResponseMessage() + ":with 11111" +urlSpec);
+                throw new IOException(conn.getResponseMessage() + ":with" +urlSpec);
             }
             int bytesRead =0;
             byte[] buffer = new byte[1024];
@@ -59,6 +102,7 @@ public class GenderFetcher {
     public String getUrlString(String urlSpec) throws IOException{
         return new String(getUrlBytes(urlSpec));
     }
+
 
     public List<Gender> fetchGenders (){
         List<Gender> genders = new ArrayList<>();
@@ -84,6 +128,22 @@ public class GenderFetcher {
         return genders;
     }
 
+
+    public class FetchGenders(){
+        OkHttpClient client = new OkHttpClient();
+        String url = "http://55627451.ngrok.io/genders";
+
+        String run(String url) throws IOException{
+            Request request = new Request.Builder()
+                    .url(url)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }
+    }
+
+
     private void parseGenders(List<Gender> genders, JSONObject jsonBody)
         throws IOException, JSONException {
         JSONArray genderJsonArray = jsonBody.getJSONArray("results");
@@ -103,3 +163,4 @@ public class GenderFetcher {
         }
     }
 }
+*/

@@ -4,19 +4,30 @@ import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutput;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +35,7 @@ import android.util.Base64;
 
 import info.androidhive.materialdesign.model.AccessToken;
 import info.androidhive.materialdesign.model.Article;
+import info.androidhive.materialdesign.model.Category;
 import info.androidhive.materialdesign.model.Gender;
 
 
@@ -36,7 +48,7 @@ public class ArticleFetcher {
     private static final String TAG = "testing";
 
     //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
-    private String nGrokURL = "ttp://ef6fca09.ngrok.io";
+    private String nGrokURL = "http://e260395e.ngrok.io";
 
     public List<Article> fetchArticles (){
         List<Article> articles = new ArrayList<>();
@@ -45,8 +57,8 @@ public class ArticleFetcher {
 
             String url = Uri.parse(nGrokURL + "/articles/")
                     .buildUpon()
-                    .appendQueryParameter("type", "GET")
-                    .appendQueryParameter("dataType", "json")
+                    .appendQueryParameter("method", "GET")
+                    .appendQueryParameter("format", "json")
                     .appendQueryParameter("extras", "url_s")
                     .build().toString();
 
@@ -56,7 +68,7 @@ public class ArticleFetcher {
             JSONObject jsonBody = new JSONObject(jsonString);
             parseArticles(articles, jsonBody);
         } catch(IOException ioe){
-            Log.e(TAG, "Failed to fetch items 2222", ioe);
+            Log.e(TAG, "Failed to fetch items", ioe);
         } catch(JSONException je){
             Log.e(TAG, "Failed to parse JSON", je);
         }
@@ -93,18 +105,18 @@ public class ArticleFetcher {
             throws IOException, JSONException {
         JSONArray articleJsonArray = jsonBody.getJSONArray("results");
 
-        Log.i(TAG, "parseArticle");
-
         for (int i=0; i < articleJsonArray.length(); i++) {
             JSONObject genderJsonObject = articleJsonArray.getJSONObject(i);
 
             String articleTitle = genderJsonObject.getString("title");
-            Log.i(TAG, articleTitle);
             String articleContent = genderJsonObject.getString("content");
 
             Article article = new Article();
             article.setTitle(articleTitle);
             article.setContent(articleContent);
+            String testTitle = article.getTitle();
+            Log.i(TAG, "ARTICLE TITLE");
+            Log.i(TAG, testTitle);
 
             articles.add(article);
 

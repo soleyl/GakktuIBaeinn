@@ -13,23 +13,29 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import info.androidhive.materialdesign.ArticleFetcher;
 import info.androidhive.materialdesign.GenderFetcher;
+import info.androidhive.materialdesign.PostArticle;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.model.Article;
 import info.androidhive.materialdesign.model.Gender;
 
 
@@ -38,9 +44,10 @@ public class HomeFragment extends Fragment {
     private TextView mannouncement1TextView;
     private TextView mannouncement2TextView;
     private List<Gender> mGenders;
+    private List<Article> mArticles;
     String TAG= "testing";
-    private ProgressDialog progressDialog;
-    private String testCategory = "";
+
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -70,33 +77,14 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private void setAnnouncement2(List<Gender> genders){
 
-        final String nameToDisplay= genders.get(0).getName();
-        int idToDisplay= genders.get(0).getId();
+    private void setAnnouncement2(List<Article> articles){
+        int indexOfNewestArticle= articles.size()-1;
+        Article newestArticle = articles.get(indexOfNewestArticle);
+        String newestArticleTitle = newestArticle.getTitle();
+        mannouncement2TextView.setText(newestArticleTitle);
 
-        mannouncement2TextView.setText(nameToDisplay);
-        Log.i(TAG, nameToDisplay);
-
-        // Reload current fragment
-        Fragment frg = null;
-        frg = getFragmentManager().findFragmentByTag("HomeFragment");
-        final FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.detach(frg);
-        ft.attach(frg);
-        ft.commit();
-
-        /*
-
-        getActivity().runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Log.i(TAG, "inside RUN");
-                                            mannouncement2TextView.setText(nameToDisplay);
-                                        }
-                                    }
-        );
-        */
+        Log.i(TAG, "refreshedData in Home Fragment");
 
         }
 
@@ -115,21 +103,52 @@ public class HomeFragment extends Fragment {
 
         //Display 2nd announcement.  Just testing a server connection w gender now.
         mannouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
-        AsyncTask task = new FetchGendersTask();
+        AsyncTask task = new FetchArticlesTask();
+        //AsyncTask task = new FetchGendersTask();
         task.execute();
+
+        AsyncTask task2 = new PostArticleTask();
+        task2.execute();
+
+
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    private class FetchArticlesTask extends AsyncTask<Object, Void, List<Article>>{
+
+        @Override
+        protected List<Article> doInBackground(Object... params){
+            return new ArticleFetcher().fetchArticles();
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Article> articles){
+            mArticles = articles;
+            Log.i(TAG, "inside Postexecute");
+            //If we found at least 1 article on the server, let's update our View/Fragment
+            if(mArticles.size() >0) {setAnnouncement2(mArticles);}
+
+        }
+
     }
 
     private class FetchGendersTask extends AsyncTask<Object, Void, List<Gender>>{
 
         @Override
         protected List<Gender> doInBackground(Object... params){
-                return new GenderFetcher().fetchGenders();
-
+            Log.e(TAG, "in do In Background FetchGenders");
+            List<Gender> returnList = new ArrayList<Gender>();
+                try{
+                     returnList = new GenderFetcher().get();
+                }
+                catch(IOException e){
+                    Log.e("error", "error TROY");
+                }
+            return returnList;
         }
-
 
         @Override
         protected void onPostExecute(List<Gender> genders){
@@ -141,6 +160,35 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
+    private class PostArticleTask extends AsyncTask<Object, Void, String>{
+
+        @Override
+        protected String doInBackground(Object... params){
+            Log.e(TAG, "in do In Background PostArticleTask");
+            List<Gender> returnList = new ArrayList<Gender>();
+            String s ="";
+            try{
+                PostArticle pa = new PostArticle();
+                s = pa.postarticle();
+            }
+            catch(IOException e){
+                Log.e("error", "error PostArticleRask");
+            }
+            return s;
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            String x = s;
+            Log.i(TAG, "inside execute");
+            //setAnnouncement2(mGenders);
+
+        }
+
+    }
+
+
 
     @Override
     public void onAttach(Activity activity) {

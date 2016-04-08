@@ -58,15 +58,32 @@
         android:layout_marginBottom="10dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardBackgroundColor="@color/colorAccent">
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="20dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:id="@+id/announcement2"
-        android:text="announcement 2 here" />
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="info.androidhive.materialdesign.activity.HomeFragment"
+            >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:id="@+id/static_announcement_2"
+            android:text="@string/static_announcement_2_text" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_below="@id/static_announcement_2"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:id="@+id/announcement2"
+            android:text="announcement 2 here" />
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
     <!-- End Announcement2  -->
