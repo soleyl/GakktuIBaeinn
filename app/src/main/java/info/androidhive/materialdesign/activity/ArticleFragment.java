@@ -6,11 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import info.androidhive.materialdesign.R;
-import info.androidhive.materialdesign.adapter.MentorAdapter;
+import info.androidhive.materialdesign.adapter.ArticleAdapter;
 
 /**
  * Created by Ravi on 29/07/15.
@@ -44,6 +46,16 @@ public class ArticleFragment extends Fragment {
         ListView articleListView = (ListView) rootView.findViewById(R.id.articles_list_view);
         articleListView.setAdapter(articleAdapter);
 
+        //Temporary Listener.  For now it just makes a toast that displays the title of the row. We will add better functionality...
+        articleListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String articles = String.valueOf(parent.getItemAtPosition(position));
+                        Toast.makeText(getActivity(), articles, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
 
         // Inflate the layout for this fragment
         return rootView;
