@@ -2,10 +2,12 @@ package info.androidhive.materialdesign.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import info.androidhive.materialdesign.PostArticle;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.model.Gender;
 import info.androidhive.materialdesign.model.Question;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ravi on 29/07/15.
@@ -28,6 +36,7 @@ public class ConfirmArticleFragment extends Fragment {
     private Button mConfirmButton;
     private Button mEditButton;
     private Button mDiscardButton;
+    private String TAG = "confirm article";
 
     public ConfirmArticleFragment() {
         // Required empty public constructor
@@ -73,9 +82,12 @@ public class ConfirmArticleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 /* ------------  TO DO     -----------------
+                Create new Article Object
                 Connect to Server
                 Save to DB
                  */
+                AsyncTask paTask = new PostArticleTask();
+                paTask.execute();
                 Toast.makeText(getActivity(),"Article saved to Database", Toast.LENGTH_SHORT).show();
                 clearFromSharedPreferences();
                 //----------Return to Home Fragment---------------------//
@@ -88,6 +100,8 @@ public class ConfirmArticleFragment extends Fragment {
             }
         });
         // -----------------------------------------------------------------------------//
+
+
         // ---------------------- EDIT BUTTON ------------------------------------------//
         mEditButton = (Button) rootView.findViewById(R.id.confirm_article_edit_button);
         mEditButton.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +119,8 @@ public class ConfirmArticleFragment extends Fragment {
             }
         });
         // -----------------------------------------------------------------------------//
+
+
         // ---------------------- DISCARD BUTTON ------------------------------------------//
         mDiscardButton = (Button) rootView.findViewById(R.id.confirm_article_discard_button);
         mDiscardButton.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +142,33 @@ public class ConfirmArticleFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    private class PostArticleTask extends AsyncTask<Object, Void, String>{
+
+        @Override
+        protected String doInBackground(Object... params){
+            Log.e(TAG, "in do In Background PostArticleTask");
+            List<Gender> returnList = new ArrayList<Gender>();
+            String s ="";
+            try{
+                PostArticle pa = new PostArticle();
+                s = pa.postarticle();
+            }
+            catch(IOException e){
+                Log.e("error", "error PostArticleRask");
+            }
+            return s;
+        }
+
+        @Override
+        protected void onPostExecute(String s){
+            String x = s;
+            Log.i(TAG, "inside execute");
+            //setAnnouncement2(mGenders);
+
+        }
+
     }
 
     @Override
