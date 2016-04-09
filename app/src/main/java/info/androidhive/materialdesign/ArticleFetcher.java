@@ -47,15 +47,12 @@ public class ArticleFetcher {
 
     private static final String TAG = "testing";
 
-    //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
-    private String nGrokURL = "http://ee6ce353.ngrok.io";
-
     public List<Article> fetchArticles (){
         List<Article> articles = new ArrayList<>();
 
         try {
 
-            String url = Uri.parse(nGrokURL + "/articles/")
+            String url = Uri.parse(Utils.url() + "/articles/")
                     .buildUpon()
                     .appendQueryParameter("method", "GET")
                     .appendQueryParameter("format", "json")
