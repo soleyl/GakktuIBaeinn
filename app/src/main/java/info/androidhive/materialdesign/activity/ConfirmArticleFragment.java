@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import info.androidhive.materialdesign.PostArticle;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.model.Article;
 import info.androidhive.materialdesign.model.Gender;
 import info.androidhive.materialdesign.model.Question;
 import android.content.SharedPreferences;
@@ -67,8 +68,8 @@ public class ConfirmArticleFragment extends Fragment {
         // --------------------Display the Locally-Stored Article --------------------------//
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
-        String title = sharedPref.getString("title", "null");
-        String body = sharedPref.getString("body", "null");
+        final String title = sharedPref.getString("title", "null");
+        final String body = sharedPref.getString("body", "null");
         mArticleToConfirmTitleTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_title);
         mArticleToConfirmTitleTextView.setText(title);
         mArticleToConfirmBodyTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_body);
@@ -86,7 +87,10 @@ public class ConfirmArticleFragment extends Fragment {
                 Connect to Server
                 Save to DB
                  */
-                AsyncTask paTask = new PostArticleTask();
+                Article articleForDB = new Article();
+                articleForDB.setTitle(title);
+                articleForDB.setContent(body);
+                AsyncTask paTask = new PostArticleTask(articleForDB);
                 paTask.execute();
                 Toast.makeText(getActivity(),"Article saved to Database", Toast.LENGTH_SHORT).show();
                 clearFromSharedPreferences();
@@ -146,14 +150,21 @@ public class ConfirmArticleFragment extends Fragment {
 
     private class PostArticleTask extends AsyncTask<Object, Void, String>{
 
+        public Article TasksArticle;
+
+        //Overriding the Constructor so that we can pass along an article
+        public PostArticleTask (Article a){
+            super();
+            TasksArticle = a;
+        }
+
         @Override
         protected String doInBackground(Object... params){
             Log.e(TAG, "in do In Background PostArticleTask");
-            List<Gender> returnList = new ArrayList<Gender>();
             String s ="";
             try{
                 PostArticle pa = new PostArticle();
-                s = pa.postarticle();
+                s = pa.postarticle(TasksArticle);
             }
             catch(IOException e){
                 Log.e("error", "error PostArticleRask");
