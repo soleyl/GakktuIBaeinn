@@ -4,36 +4,21 @@ package info.androidhive.materialdesign.activity;
  * Created by Ravi on 29/07/15.
  */
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
 import info.androidhive.materialdesign.ArticleFetcher;
 import info.androidhive.materialdesign.GenderFetcher;
-import info.androidhive.materialdesign.PostArticle;
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.model.Article;
 import info.androidhive.materialdesign.model.Gender;

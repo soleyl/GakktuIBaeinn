@@ -12,20 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import info.androidhive.materialdesign.PostArticle;
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.model.Article;
-import info.androidhive.materialdesign.model.Gender;
-import info.androidhive.materialdesign.model.Question;
 import android.content.SharedPreferences;
 import android.widget.Toast;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ravi on 29/07/15.
