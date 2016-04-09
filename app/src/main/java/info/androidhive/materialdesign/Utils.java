@@ -1,7 +1,5 @@
 package info.androidhive.materialdesign;
 
-import java.util.List;
-
 /**
  * Created by arnigeirulfarsson on 9.4.2016.
  */

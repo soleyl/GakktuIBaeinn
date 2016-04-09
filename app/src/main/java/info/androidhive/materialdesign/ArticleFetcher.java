@@ -1,44 +1,18 @@
 package info.androidhive.materialdesign;
 
 import android.net.Uri;
-import android.util.Base64;
 import android.util.Log;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import android.util.Base64;
-
-import info.androidhive.materialdesign.model.AccessToken;
 import info.androidhive.materialdesign.model.Article;
-import info.androidhive.materialdesign.model.Category;
-import info.androidhive.materialdesign.model.Gender;
-
-
 
 /**
  * Created by troyporter on 4/05/16.
