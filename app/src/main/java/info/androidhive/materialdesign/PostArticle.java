@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import info.androidhive.materialdesign.model.Article;
 import info.androidhive.materialdesign.model.Gender;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -35,16 +36,26 @@ public class PostArticle {
         return response.body().string();
     }
 
-    String genderJson (String name){
-        return "{" + '\"' + "name" + '\"' + ": " + '\"' + name + '\"' + "}";
+    String setasKeyValuePair (String key, String value){
+        //return "{" + '\"' + "name" + '\"' + ": " + '\"' + name + '\"' + "}";
+        return '\"' + key + '\"' + ": " + '\"' + value + '\"';
     }
 
-    public String postarticle() throws IOException{
+    String finalizedJsonString (String pseudoJson){
+        return "{" + pseudoJson + "}";
+    }
+
+    public String postarticle(Article article) throws IOException{
         PostArticle postArticle = new PostArticle();
-        String json = genderJson("magical");
-        String response = postArticle.post("http://e260395e.ngrok.io/genders/", json);
-        String TAG= "postarticle";
-        Log.e(TAG,response);
+
+        String titleData = article.getTitle();
+        String contentData = article.getContent();
+        String json = finalizedJsonString(setasKeyValuePair("title", titleData) + "," + setasKeyValuePair("content", contentData));
+        String response = postArticle.post("http://ee6ce353.ngrok.io/articles/", json);
+        //String json = genderJson("magical");
+        //String response = postArticle.post("http://e260395e.ngrok.io/genders/", json);
+        //String TAG= "postarticle";
+        //Log.e(TAG,response);
         return response;
     }
 

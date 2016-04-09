@@ -105,8 +105,8 @@ public class HomeFragment extends Fragment {
         //AsyncTask task = new FetchGendersTask();
         task.execute();
 
-        AsyncTask task2 = new PostArticleTask();
-        task2.execute();
+        //AsyncTask task2 = new PostArticleTask();
+        //task2.execute();
 
         // Inflate the layout for this fragment
         return rootView;
@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
-
+/*
     private class PostArticleTask extends AsyncTask<Object, Void, String>{
 
         @Override
@@ -181,7 +181,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
-
+*/
 
 
     @Override
