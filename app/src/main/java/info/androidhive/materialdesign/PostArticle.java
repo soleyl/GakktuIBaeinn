@@ -1,12 +1,8 @@
 package info.androidhive.materialdesign;
 
 import android.util.Log;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import info.androidhive.materialdesign.model.Gender;
+import info.androidhive.materialdesign.model.Article;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -35,17 +31,14 @@ public class PostArticle {
         return response.body().string();
     }
 
-    String genderJson (String name){
-        return "{" + '\"' + "name" + '\"' + ": " + '\"' + name + '\"' + "}";
-    }
-
-    public String postarticle() throws IOException{
+    public String postarticle(Article article) throws IOException{
         PostArticle postArticle = new PostArticle();
-        String json = genderJson("magical");
-        String response = postArticle.post("http://e260395e.ngrok.io/genders/", json);
-        String TAG= "postarticle";
-        Log.e(TAG,response);
-        return response;
+        String titleData = article.getTitle();
+        String contentData = article.getContent();
+        String json = Utils.finalizedJsonString(
+                Utils.setKeyValuePair("title", titleData)
+                        + "," + Utils.setKeyValuePair("content", contentData));
+        return postArticle.post(Utils.url() + "/articles/", json);
     }
 
 }
