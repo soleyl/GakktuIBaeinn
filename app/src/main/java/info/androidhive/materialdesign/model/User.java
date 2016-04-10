@@ -6,11 +6,9 @@ package info.androidhive.materialdesign.model;
 public class User {
 
     private int mId;
-    //ASK ÁRNI: SHOULD THIS BE A URL, NOT STRING?
     private String mUrl;
     private String mUserName;
     private String mEmail;
-    //Groups?
 
     public User() {}
 

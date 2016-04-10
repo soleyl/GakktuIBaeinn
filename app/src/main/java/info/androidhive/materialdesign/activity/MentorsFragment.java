@@ -29,7 +29,6 @@ public class MentorsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        //initDataset();
     }
 
     @Override
@@ -55,8 +54,8 @@ public class MentorsFragment extends Fragment {
                 new AdapterView.OnItemClickListener(){
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                        String mentor = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(getActivity(), mentor, Toast.LENGTH_SHORT).show();
+                        String defaultMessage = getString(R.string.default_mentor_message);
+                        Toast.makeText(getActivity(), defaultMessage, Toast.LENGTH_SHORT).show();
                     }
                 }
         );

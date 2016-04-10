@@ -21,6 +21,9 @@ public class PostArticle {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
 
+    //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
+    private String nGrokURL = "http://56b4c417.ngrok.io/articles/";
+
     OkHttpClient client = new OkHttpClient();
 
     String post(String url, String json) throws IOException{
@@ -29,15 +32,11 @@ public class PostArticle {
                 .url(url)
                 .post(body)
                 .build();
-        String TAG= "postarticle";
-        Log.e(TAG,url);
-        Log.e(TAG,json);
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
 
     String setasKeyValuePair (String key, String value){
-        //return "{" + '\"' + "name" + '\"' + ": " + '\"' + name + '\"' + "}";
         return '\"' + key + '\"' + ": " + '\"' + value + '\"';
     }
 
@@ -51,11 +50,7 @@ public class PostArticle {
         String titleData = article.getTitle();
         String contentData = article.getContent();
         String json = finalizedJsonString(setasKeyValuePair("title", titleData) + "," + setasKeyValuePair("content", contentData));
-        String response = postArticle.post("http://ee6ce353.ngrok.io/articles/", json);
-        //String json = genderJson("magical");
-        //String response = postArticle.post("http://e260395e.ngrok.io/genders/", json);
-        //String TAG= "postarticle";
-        //Log.e(TAG,response);
+        String response = postArticle.post(nGrokURL, json);
         return response;
     }
 

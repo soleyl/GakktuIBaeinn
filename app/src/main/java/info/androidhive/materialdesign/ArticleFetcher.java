@@ -11,32 +11,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.Authenticator;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import android.util.Base64;
-
-import info.androidhive.materialdesign.model.AccessToken;
 import info.androidhive.materialdesign.model.Article;
-import info.androidhive.materialdesign.model.Category;
-import info.androidhive.materialdesign.model.Gender;
+
 
 
 
@@ -48,7 +31,7 @@ public class ArticleFetcher {
     private static final String TAG = "testing";
 
     //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
-    private String nGrokURL = "http://ee6ce353.ngrok.io";
+    private String nGrokURL = "http://56b4c417.ngrok.io";
 
     public List<Article> fetchArticles (){
         List<Article> articles = new ArrayList<>();
@@ -61,9 +44,6 @@ public class ArticleFetcher {
                     .appendQueryParameter("format", "json")
                     .appendQueryParameter("extras", "url_s")
                     .build().toString();
-
-            Log.e(TAG, url);
-
             String jsonString = getUrlString(url);
             JSONObject jsonBody = new JSONObject(jsonString);
             parseArticles(articles, jsonBody);
@@ -114,9 +94,6 @@ public class ArticleFetcher {
             Article article = new Article();
             article.setTitle(articleTitle);
             article.setContent(articleContent);
-            String testTitle = article.getTitle();
-            Log.i(TAG, "ARTICLE TITLE");
-            Log.i(TAG, testTitle);
 
             articles.add(article);
 

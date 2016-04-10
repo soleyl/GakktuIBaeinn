@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -43,11 +44,8 @@ public class HomeFragment extends Fragment {
 
     private TextView mannouncement1TextView;
     private TextView mannouncement2TextView;
-    private List<Gender> mGenders;
     private List<Article> mArticles;
     String TAG= "testing";
-
-
 
     public HomeFragment() {
         // Required empty public constructor
@@ -102,11 +100,7 @@ public class HomeFragment extends Fragment {
         //Display 2nd announcement.
         mannouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
         AsyncTask task = new FetchArticlesTask();
-        //AsyncTask task = new FetchGendersTask();
         task.execute();
-
-        //AsyncTask task2 = new PostArticleTask();
-        //task2.execute();
 
         // Inflate the layout for this fragment
         return rootView;
@@ -123,66 +117,12 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(List<Article> articles){
             mArticles = articles;
-            Log.i(TAG, "inside Postexecute");
             //If we found at least 1 article on the server, let's update our View/Fragment
             if(mArticles.size() >0) {setAnnouncement2(mArticles);}
 
         }
 
     }
-
-    private class FetchGendersTask extends AsyncTask<Object, Void, List<Gender>>{
-
-        @Override
-        protected List<Gender> doInBackground(Object... params){
-            Log.e(TAG, "in do In Background FetchGenders");
-            List<Gender> returnList = new ArrayList<Gender>();
-                try{
-                     returnList = new GenderFetcher().get();
-                }
-                catch(IOException e){
-                    Log.e("error", "error TROY");
-                }
-            return returnList;
-        }
-
-        @Override
-        protected void onPostExecute(List<Gender> genders){
-            mGenders = genders;
-            Log.i(TAG, "inside execute");
-            //setAnnouncement2(mGenders);
-        }
-
-    }
-/*
-    private class PostArticleTask extends AsyncTask<Object, Void, String>{
-
-        @Override
-        protected String doInBackground(Object... params){
-            Log.e(TAG, "in do In Background PostArticleTask");
-            List<Gender> returnList = new ArrayList<Gender>();
-            String s ="";
-            try{
-                PostArticle pa = new PostArticle();
-                s = pa.postarticle();
-            }
-            catch(IOException e){
-                Log.e("error", "error PostArticleRask");
-            }
-            return s;
-        }
-
-        @Override
-        protected void onPostExecute(String s){
-            String x = s;
-            Log.i(TAG, "inside execute");
-            //setAnnouncement2(mGenders);
-
-        }
-
-    }
-*/
-
 
     @Override
     public void onAttach(Activity activity) {

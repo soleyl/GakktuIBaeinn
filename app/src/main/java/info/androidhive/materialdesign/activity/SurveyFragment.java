@@ -131,7 +131,7 @@ public class SurveyFragment extends Fragment {
                 else concludeSurvey();
             }
         });
-        // -----------------------------------------------------------------------------//
+
         // ---------------------- NO BUTTON ------------------------------------------//
         mNoButton = (Button) rootView.findViewById(R.id.survey_no_button);
         mNoButton.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +147,7 @@ public class SurveyFragment extends Fragment {
                 else concludeSurvey();
             }
         });
-        // -----------------------------------------------------------------------------//
+
 
         // ---------------------- SKIP BUTTON ------------------------------------------//
         mSkipButton = (Button) rootView.findViewById(R.id.survey_skip_button);
@@ -162,7 +162,7 @@ public class SurveyFragment extends Fragment {
                 else concludeSurvey();
             }
         });
-        // -----------------------------------------------------------------------------//
+
 
         // ---------------------- GO TO PROFILE BUTTON ------------------------------------------//
         mEndOfSurveyButton.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +177,7 @@ public class SurveyFragment extends Fragment {
 
             }
         });
-        // -----------------------------------------------------------------------------//
+
 
         //After setup, display the first question
         updateQuestion();
