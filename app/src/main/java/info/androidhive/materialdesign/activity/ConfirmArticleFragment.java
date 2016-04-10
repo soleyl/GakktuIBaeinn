@@ -13,13 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import info.androidhive.materialdesign.PostArticle;
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.model.Article;
 import android.content.SharedPreferences;
 import android.widget.Toast;
-
 import java.io.IOException;
 
 /**

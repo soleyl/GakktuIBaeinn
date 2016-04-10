@@ -1,13 +1,8 @@
 package info.androidhive.materialdesign;
 
 import android.util.Log;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import info.androidhive.materialdesign.model.Article;
-import info.androidhive.materialdesign.model.Gender;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,22 +31,14 @@ public class PostArticle {
         return response.body().string();
     }
 
-    String setasKeyValuePair (String key, String value){
-        return '\"' + key + '\"' + ": " + '\"' + value + '\"';
-    }
-
-    String finalizedJsonString (String pseudoJson){
-        return "{" + pseudoJson + "}";
-    }
-
     public String postarticle(Article article) throws IOException{
         PostArticle postArticle = new PostArticle();
-
         String titleData = article.getTitle();
         String contentData = article.getContent();
-        String json = finalizedJsonString(setasKeyValuePair("title", titleData) + "," + setasKeyValuePair("content", contentData));
-        String response = postArticle.post(nGrokURL, json);
-        return response;
+        String json = Utils.finalizedJsonString(
+                Utils.setKeyValuePair("title", titleData)
+                        + "," + Utils.setKeyValuePair("content", contentData));
+        return postArticle.post(Utils.url() + "/articles/", json);
     }
 
 }

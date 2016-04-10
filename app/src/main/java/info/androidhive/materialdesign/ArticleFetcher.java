@@ -1,13 +1,7 @@
 package info.androidhive.materialdesign;
 
 import android.net.Uri;
-import android.util.Base64;
 import android.util.Log;
-
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,9 +13,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import info.androidhive.materialdesign.model.Article;
-
-
-
 
 /**
  * Created by troyporter on 4/05/16.
@@ -38,7 +29,7 @@ public class ArticleFetcher {
 
         try {
 
-            String url = Uri.parse(nGrokURL + "/articles/")
+            String url = Uri.parse(Utils.url() + "/articles/")
                     .buildUpon()
                     .appendQueryParameter("method", "GET")
                     .appendQueryParameter("format", "json")

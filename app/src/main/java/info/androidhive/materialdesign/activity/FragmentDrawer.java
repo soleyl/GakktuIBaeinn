@@ -17,10 +17,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.adapter.NavigationDrawerAdapter;
 import info.androidhive.materialdesign.model.NavDrawerItem;
