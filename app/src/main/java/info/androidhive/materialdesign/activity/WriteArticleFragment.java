@@ -24,16 +24,12 @@ import android.widget.Toast;
  */
 public class WriteArticleFragment extends Fragment {
 
-    private TextView mWriteArticleInstructions;
     private EditText mWriteArticleEditTitle;
     private EditText mWriteArticleEditBody;
     private Button mSaveButton;
     private Button mCancelButton;
-    private int mCurrentPhase=0;
 
     private static final String TAG = "writeArticle";
-
-    String[] writingPhases = {"Title", "Body"};
 
     public WriteArticleFragment() {
         // Required empty public constructor
@@ -45,6 +41,7 @@ public class WriteArticleFragment extends Fragment {
 
     }
 
+    //This function saves the article to Shared Preferences.
     public void saveArticleLocally(){
         //Get Title from User's input
         String articleTitle = mWriteArticleEditTitle.getText().toString();
@@ -70,35 +67,11 @@ public class WriteArticleFragment extends Fragment {
 
     }
 
-    /*
-    public void saveTitle(){
-
-        //If User is returning to Edit a locally stored article, fetch the data
-        SharedPreferences sharedPref = getActivity().getSharedPreferences(
-                getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
-        String localStoredArticleBody = sharedPref.getString("body", null);
-        if (localStoredArticleBody != null){ mWriteArticleEditText.setText(localStoredArticleBody);}
-    }
-
-    public void saveBody(){
-
-
-        //Move to a ConfirmArticle Fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        ConfirmArticleFragment confirmFrag = new ConfirmArticleFragment();
-        fragmentTransaction.replace(R.id.container_body,confirmFrag);
-        fragmentTransaction.commit();
-
-    }*/
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_write_article, container, false);
 
-        //mWriteArticleInstructions = (TextView) rootView.findViewById(R.id.write_article_instructions);
         mWriteArticleEditTitle = (EditText) rootView.findViewById(R.id.write_article_input_field_title);
         mWriteArticleEditBody = (EditText) rootView.findViewById(R.id.write_article_input_field_body);
 
@@ -107,6 +80,7 @@ public class WriteArticleFragment extends Fragment {
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         String localStoredArticleTitle = sharedPref.getString("title", null);
         String localStoredArticleBody = sharedPref.getString("body", null);
+
         //Display the old Article data so User can edit it.
         if (localStoredArticleTitle != null){ mWriteArticleEditTitle.setText(localStoredArticleTitle);}
         if (localStoredArticleBody != null){ mWriteArticleEditBody.setText(localStoredArticleBody);}
@@ -117,13 +91,11 @@ public class WriteArticleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 saveArticleLocally();
-                ArticleFetcher test = new ArticleFetcher();
-                //test.uploadArticle();
                 String t = "Article Saved Locally";
                 Toast.makeText(getActivity(),t, Toast.LENGTH_SHORT).show();
             }
         });
-        // -----------------------------------------------------------------------------//
+
         // ---------------------- CANCEL BUTTON ------------------------------------------//
         mCancelButton = (Button) rootView.findViewById(R.id.write_article_cancel_button);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -138,7 +110,6 @@ public class WriteArticleFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
-        // -----------------------------------------------------------------------------//
 
         // Inflate the layout for this fragment
         return rootView;

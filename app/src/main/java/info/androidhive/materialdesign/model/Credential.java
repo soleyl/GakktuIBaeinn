@@ -9,13 +9,13 @@ public class Credential {
 
     public Credential() {}
 
-    private void setId(int i){mId = i;}
+    public void setId(int i){mId = i;}
 
-    private int getId(){return mId;}
+    public int getId(){return mId;}
 
-    private void setName(String n){mName = n;}
+    public void setName(String n){mName = n;}
 
-    private String getName(){
+    public String getName(){
         return mName;
     }
 }

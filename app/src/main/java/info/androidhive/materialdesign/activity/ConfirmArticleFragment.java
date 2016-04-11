@@ -67,7 +67,7 @@ public class ConfirmArticleFragment extends Fragment {
         mArticleToConfirmTitleTextView.setText(title);
         mArticleToConfirmBodyTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_body);
         mArticleToConfirmBodyTextView.setText(body);
-        // --------------------===================================--------------------------//
+
 
 
         // ---------------------- CONFIRM BUTTON ------------------------------------------//
@@ -93,10 +93,9 @@ public class ConfirmArticleFragment extends Fragment {
                 HomeFragment homeFrag = new HomeFragment();
                 fragmentTransaction.replace(R.id.container_body,homeFrag);
                 fragmentTransaction.commit();
-                //-------------------------------------------------------//
+
             }
         });
-        // -----------------------------------------------------------------------------//
 
 
         // ---------------------- EDIT BUTTON ------------------------------------------//
@@ -111,11 +110,10 @@ public class ConfirmArticleFragment extends Fragment {
                 WriteArticleFragment writeFrag = new WriteArticleFragment();
                 fragmentTransaction.replace(R.id.container_body,writeFrag);
                 fragmentTransaction.commit();
-                //-------------------------------------------------------//
 
             }
         });
-        // -----------------------------------------------------------------------------//
+
 
 
         // ---------------------- DISCARD BUTTON ------------------------------------------//
@@ -131,11 +129,11 @@ public class ConfirmArticleFragment extends Fragment {
                 HomeFragment homeFrag = new HomeFragment();
                 fragmentTransaction.replace(R.id.container_body,homeFrag);
                 fragmentTransaction.commit();
-                //-------------------------------------------------------//
+
 
             }
         });
-        // -----------------------------------------------------------------------------//
+
 
         // Inflate the layout for this fragment
         return rootView;
@@ -143,6 +141,7 @@ public class ConfirmArticleFragment extends Fragment {
 
     private class PostArticleTask extends AsyncTask<Object, Void, String>{
 
+        //This is the Article given to the Task to be sent to DB
         public Article TasksArticle;
 
         //Overriding the Constructor so that we can pass along an article
@@ -153,14 +152,13 @@ public class ConfirmArticleFragment extends Fragment {
 
         @Override
         protected String doInBackground(Object... params){
-            Log.e(TAG, "in do In Background PostArticleTask");
             String s ="";
             try{
                 PostArticle pa = new PostArticle();
                 s = pa.postarticle(TasksArticle);
             }
             catch(IOException e){
-                Log.e("error", "error PostArticleRask");
+                Log.e("error", "Error in AsyncTask");
             }
             return s;
         }
@@ -168,8 +166,6 @@ public class ConfirmArticleFragment extends Fragment {
         @Override
         protected void onPostExecute(String s){
             String x = s;
-            Log.i(TAG, "inside execute");
-            //setAnnouncement2(mGenders);
 
         }
 

@@ -2,7 +2,6 @@ package info.androidhive.materialdesign.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -68,8 +67,8 @@ public class ProfileFragment extends Fragment {
 
         gatherProfileData();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, profileData);
-
         profileGrid.setAdapter(adapter);
+
         //Inflate the layout for this fragment
         return rootView;
     }

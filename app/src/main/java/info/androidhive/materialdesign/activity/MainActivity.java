@@ -80,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             case 0:
                 fragment = new HomeFragment();
                 title = getString(R.string.title_home);
-                //getFragmentManager().beginTransaction()
-                        //.replace(R.id.drawer_layout,fragment,getString(R.string.home_fragment_tag));
                 break;
             case 1:
                 fragment = new SurveyFragment();

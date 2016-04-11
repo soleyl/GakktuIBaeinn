@@ -32,20 +32,17 @@
     <string name="title_write_article">Write An Article</string>
     <string name="title_confirm_article">Confirm Your Article</string>
 
-
     <!-- Strings related to the Home Fragment -->
     <string name="homeTitleDisplay">Gakktu í Bæinn</string>
-    <string name="text_announcement1_not_started">Please take our survey to enhance your experience.
-        Please complete our Survey.</string>
-    <string name="text_announcement1_started"> Don\'t stop now! Please complete our survey. </string>
+    <string name="text_announcement1_not_started">Please take our survey to enhance your experience.</string>
+    <string name="text_announcement1_started"> Don\'t stop now! Please finish our survey. </string>
     <string name="text_announcement1_completed">Thanks for the info. Your profile has been updated.</string>
     <string name="survey_not_started_status">notStarted</string>
     <string name="survey_started_status">started</string>
     <string name="survey_completed_status">completed</string>
     <string name="home_fragment_tag">homeTag</string>
     <string name="static_announcement_2_text">NEWEST ARTICLE:</string>
-
-
+    <string name="placeholder_new_article_title">...gathering data...</string>
 
     <!-- Strings related to the Survey Fragment -->
     <string name="survey_yes_button_text">Yes</string>
@@ -72,6 +69,8 @@
     <string name="hint_article_title">Your Title Here</string>
     <string name="hint_article_body">Your Content Here</string>
 
+    <!-- Strings for Mentor Fragment -->
+    <string name="default_mentor_message">Messaging not available yet</string>
 
     <!-- Strings related to the ConfirmArticle Fragment -->
     <string name="confirm">Confirm</string>
@@ -90,5 +89,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    mentor_link_button_text
+
 </resources>
