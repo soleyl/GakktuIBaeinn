@@ -1,5 +1,6 @@
 package info.androidhive.materialdesign.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.List;
+
+import info.androidhive.materialdesign.ArticleFetcher;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.model.Article;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -20,11 +25,15 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
+    private List<Article> mArticles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        AsyncTask task = new FetchArticlesTask();
+        task.execute();
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -39,6 +48,33 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // display the first navigation drawer view on app launch
         displayView(0);
     }
+
+    public boolean articlesExist() {
+        if (mArticles==null) { return false;}
+        else return true;
+    }
+
+    public String getNewestArticleTitle(){
+        int indexOfNewestArticle= mArticles.size()-1;
+        Article newestArticle = mArticles.get(indexOfNewestArticle);
+        return newestArticle.getTitle();
+
+    }
+    private class FetchArticlesTask extends AsyncTask<Object, Void, List<Article>>{
+
+        @Override
+        protected List<Article> doInBackground(Object... params){
+            return new ArticleFetcher().fetchArticles();
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Article> articles){
+            mArticles = articles;
+        }
+
+    }
+
 
 
     @Override
