@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         @Override
         protected void onPostExecute(List<Article> articles){
             mArticles = articles;
+
         }
 
     }
