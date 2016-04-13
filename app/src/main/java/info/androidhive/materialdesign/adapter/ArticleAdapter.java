@@ -41,16 +41,18 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         Article articleItem = getItem(position);
         String articleTitleItem = articleItem.getTitle();
         String imageUrlString = articleItem.getImage();
-        //String imageUrlString = "http://weatherservers.com/images/100x100.gif";
-
+        String articleIntroItem = articleItem.getIntro();
 
         //Load title into View
         TextView article_title = (TextView) articleView.findViewById(R.id.article_title);
         article_title.setText(articleTitleItem);
 
+        //Load intro into View
+        TextView article_intro_view = (TextView) articleView.findViewById(R.id.article_intro_view);
+        article_intro_view.setText(articleIntroItem);
+
         //Load Image into View
         ImageView article_image_view = (ImageView) articleView.findViewById(R.id.article_image);
-        //Picasso.with(parent.getContext()).load(imageUrl).placeholder(R.drawable.processing_image_face).error(R.drawable.image_url_error_sadface).into(article_image_view);
         new DownloadImageTask(article_image_view)
                 .execute(imageUrlString);
 
