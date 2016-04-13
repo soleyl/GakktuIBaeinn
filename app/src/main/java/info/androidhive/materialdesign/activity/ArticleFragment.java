@@ -37,14 +37,6 @@ public class ArticleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_articles, container, false);
 
-        //create our list of articles....
-        //a list of strings...
-        String[] articleTitles = {"Health", "Organic", "Apples", "Cars", "Housing", "Taxes", "Jobs", "Schools", "Education"};
-
-        //we need an adapter..
-        //ListAdapter articlesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, articleTitles);
-        //ListView articles_list_view = (ListView) findViewById(R.id.articles_list_view);
-
         List<Article> articles = ((MainActivity)getActivity()).getArticles();
         ListAdapter articleAdapter = new ArticleAdapter(getActivity(),articles);
         ListView articleListView = (ListView) rootView.findViewById(R.id.articles_list_view);
