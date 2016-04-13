@@ -4,34 +4,6 @@
     android:layout_height="match_parent"
     tools:context="info.androidhive.materialdesign.activity.WriteArticleFragment">
 
-    <!-- Instruction Panel -->
-    <!--
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/write_article_instructions_card"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        card_view:cardCornerRadius="10dp"
-        android:layout_below="@id/label"
-        card_view:cardBackgroundColor="@color/colorPrimary"
-        >
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/write_article_instructions"
-            android:text="@string/write_article_instruction_title_text"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/navigationBarColor"
-            android:layout_marginBottom="10dp"/>
-    </android.support.v7.widget.CardView> -->
     <EditText
         android:layout_width="match_parent"
         android:id="@+id/write_article_input_field_title"
@@ -51,12 +23,24 @@
         android:inputType="textCapSentences|textMultiLine"
         android:scrollHorizontally="false"
         android:layout_marginRight="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/article_category_instructions"
+        android:text="@string/article_category_instructions_text"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_below="@id/write_article_input_field_body"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/navigationBarColor"
+        android:layout_marginBottom="10dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/write_article_save_button"
         android:text="@string/save"
-        android:layout_below="@id/write_article_input_field_body"
+        android:layout_below="@id/article_category_instructions"
         android:layout_alignParentRight="true"
         android:background="@color/yes"
         android:layout_marginBottom="10dp"
@@ -67,13 +51,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/write_article_cancel_button"
         android:text="@string/cancel"
-        android:layout_below="@id/write_article_input_field_body"
+        android:layout_below="@id/article_category_instructions"
         android:layout_alignParentLeft="true"
         android:background="@color/no"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         />
-
-
 
 </RelativeLayout>

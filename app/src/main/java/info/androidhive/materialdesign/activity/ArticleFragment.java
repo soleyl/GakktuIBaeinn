@@ -11,8 +11,11 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.adapter.ArticleAdapter;
+import info.androidhive.materialdesign.model.Article;
 
 /**
  * Created by Ravi on 29/07/15.
@@ -42,7 +45,8 @@ public class ArticleFragment extends Fragment {
         //ListAdapter articlesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, articleTitles);
         //ListView articles_list_view = (ListView) findViewById(R.id.articles_list_view);
 
-        ListAdapter articleAdapter = new ArticleAdapter(getActivity(),articleTitles);
+        List<Article> articles = ((MainActivity)getActivity()).getArticles();
+        ListAdapter articleAdapter = new ArticleAdapter(getActivity(),articles);
         ListView articleListView = (ListView) rootView.findViewById(R.id.articles_list_view);
         articleListView.setAdapter(articleAdapter);
 

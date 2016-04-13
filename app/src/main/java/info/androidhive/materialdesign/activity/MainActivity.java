@@ -54,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         else return true;
     }
 
+    public List<Article> getArticles(){
+        return mArticles;
+    }
+
     public String getNewestArticleTitle(){
         int indexOfNewestArticle= mArticles.size()-1;
         Article newestArticle = mArticles.get(indexOfNewestArticle);

@@ -68,6 +68,7 @@
     <string name="cancel">Cancel</string>
     <string name="hint_article_title">Your Title Here</string>
     <string name="hint_article_body">Your Content Here</string>
+    <string name="article_category_instructions_text">Categorize Your Article:</string>
 
     <!-- Strings for Mentor Fragment -->
     <string name="default_mentor_message">Messaging not available yet</string>
