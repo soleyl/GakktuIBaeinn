@@ -9,6 +9,7 @@ import java.util.Date;
 public class Article {
     private String id;
     private String title;
+    private String image;
     private Category category;
     private Language language;
     private String content;
@@ -33,7 +34,11 @@ public class Article {
         content=c;
     }
 
-    public String getContent(){
-        return content;
+    public String getContent(){return content;}
+
+    public void setImage(String i){
+        image=i;
     }
+
+    public String getImage(){return image;}
 }

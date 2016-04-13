@@ -74,14 +74,16 @@ public class ArticleFetcher {
         JSONArray articleJsonArray = jsonBody.getJSONArray("results");
 
         for (int i=0; i < articleJsonArray.length(); i++) {
-            JSONObject genderJsonObject = articleJsonArray.getJSONObject(i);
+            JSONObject articleJsonObject = articleJsonArray.getJSONObject(i);
 
-            String articleTitle = genderJsonObject.getString("title");
-            String articleContent = genderJsonObject.getString("content");
+            String articleTitle = articleJsonObject.getString("title");
+            String articleContent = articleJsonObject.getString("content");
+            String articleImage = articleJsonObject.getString("image");
 
             Article article = new Article();
             article.setTitle(articleTitle);
             article.setContent(articleContent);
+            article.setImage(articleImage);
 
             articles.add(article);
 

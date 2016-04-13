@@ -36,11 +36,13 @@ public class ArticleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_articles, container, false);
-
-        List<Article> articles = ((MainActivity)getActivity()).getArticles();
-        ListAdapter articleAdapter = new ArticleAdapter(getActivity(),articles);
-        ListView articleListView = (ListView) rootView.findViewById(R.id.articles_list_view);
-        articleListView.setAdapter(articleAdapter);
+        //First, make sure MainActivities asyncTask has completed....
+        if (((MainActivity)getActivity()).articlesExist()==true) {
+            //....if so, then populate the articles
+            List<Article> articles = ((MainActivity) getActivity()).getArticles();
+            ListAdapter articleAdapter = new ArticleAdapter(getActivity(), articles);
+            ListView articleListView = (ListView) rootView.findViewById(R.id.articles_list_view);
+            articleListView.setAdapter(articleAdapter);
 
         //Temporary Listener.  For now it just makes a toast that displays the title of the row. We will add better functionality...
         articleListView.setOnItemClickListener(
@@ -50,8 +52,8 @@ public class ArticleFragment extends Fragment {
                         String articles = String.valueOf(parent.getItemAtPosition(position));
                         Toast.makeText(getActivity(), articles, Toast.LENGTH_SHORT).show();
                     }
-                }
-        );
+                });
+        }
 
         // Inflate the layout for this fragment
         return rootView;
