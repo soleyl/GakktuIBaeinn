@@ -8,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import info.androidhive.materialdesign.adapter.MentorAdapter;
 
-import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.model.Mentor;

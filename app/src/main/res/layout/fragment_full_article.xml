@@ -3,34 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="info.androidhive.materialdesign.activity.FullArticleFragment">
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/full_article_title_card"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        card_view:cardCornerRadius="10dp"
-        android:layout_below="@id/label"
-        card_view:cardBackgroundColor="@color/colorAccent">
+        android:orientation="horizontal"
+        android:id="@+id/linear_layout_title_and_pic_full_article"
+        >
+        <!-- Article Image -->
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/full_article_image_view"
+        android:src="@drawable/loading"
+        android:layout_margin="5dp"/>
+
+        <!-- Article Title -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/full_article_title"
+        android:gravity="center"
         android:textSize="30dp"
         android:textStyle="bold"
          />
-    </android.support.v7.widget.CardView>
-
+</LinearLayout>
+    <!-- Horizontal Line to separate Title from Content -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/horizontal_line"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_below="@id/linear_layout_title_and_pic_full_article"
+        android:background="@color/colorPrimaryDark"/>
+    <!-- Article Content -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/full_article_content"
-        android:layout_below="@id/full_article_title_card"
+        android:layout_below="@id/horizontal_line"
+        android:layout_margin="7dp"
         />
 
 </RelativeLayout>

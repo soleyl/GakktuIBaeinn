@@ -11,7 +11,7 @@
         android:layout_below="@id/label"
         android:layout_marginLeft="10dp"
         android:hint="@string/hint_article_title"
-        android:inputType="textCapSentences"
+        android:inputType="textCapWords"
         android:layout_marginRight="10dp"/>
     <EditText
         android:layout_width="match_parent"
