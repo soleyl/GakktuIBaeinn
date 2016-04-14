@@ -92,10 +92,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-
     <!-- Strings for CategorySelector Fragment -->
     <string name="category_selector_name_text">Children</string>
     <string name="label_for_category_seek_bar">TestLabel</string>
+
+    <!-- Strings for Article Fragment -->
+    <string name="fullArticleToView">fullarticletoview</string>
+
 
 
 </resources>

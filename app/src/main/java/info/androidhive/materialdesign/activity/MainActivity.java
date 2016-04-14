@@ -58,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         return mArticles;
     }
 
+    public Article getArticle(int i){
+        return mArticles.get(i);
+    }
+
     public String getNewestArticleTitle(){
         int indexOfNewestArticle= mArticles.size()-1;
         Article newestArticle = mArticles.get(indexOfNewestArticle);
@@ -149,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment);
+            fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack("tag");
             fragmentTransaction.commit();
 
             // set the toolbar title
