@@ -1,6 +1,7 @@
 package info.androidhive.materialdesign.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import info.androidhive.materialdesign.adapter.MentorAdapter;
+
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -43,7 +46,7 @@ public class MentorsFragment extends Fragment {
         Mentor rene = new Mentor("René", "rene@magritte.org", R.drawable.rene,R.drawable.flag_french,0,0);
         Mentor clippy = new Mentor("Clippy", "bill@gates.com", R.drawable.clippy,R.drawable.flag_swedish,R.drawable.flag_english,0);
         Mentor lucy = new Mentor("Lucy", "lucille_ball@tv.com", R.drawable.lucy,R.drawable.flag_german,0,0);
-        Mentor[] mentorData = {alice, wonderWoman, rene,clippy,lucy};
+        final Mentor[] mentorData = {alice, wonderWoman, rene,clippy,lucy};
 
         ListAdapter mentorAdapter = new MentorAdapter(getActivity(),mentorData);
         ListView mentorListView = (ListView) rootView.findViewById(R.id.mentor_list_view);
@@ -54,14 +57,24 @@ public class MentorsFragment extends Fragment {
                 new AdapterView.OnItemClickListener(){
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                        String defaultMessage = getString(R.string.default_mentor_message);
-                        Toast.makeText(getActivity(), defaultMessage, Toast.LENGTH_SHORT).show();
+                        String emailRecipient = mentorData[position].getEmail();
+                        sendEmail(emailRecipient);
                     }
                 }
         );
 
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    public void sendEmail(String mentorAddress){
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setType("message/rfc822");  //set the email recipient
+        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getString(R.string.email_subject_text));
+        String recipient = mentorAddress;
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{recipient});
+        startActivity(Intent.createChooser(emailIntent, "Send Email Using..."));
     }
 
     @Override

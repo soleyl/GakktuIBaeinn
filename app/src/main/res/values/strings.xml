@@ -72,6 +72,7 @@
 
     <!-- Strings for Mentor Fragment -->
     <string name="default_mentor_message">Messaging not available yet</string>
+    <string name="email_subject_text">Message from Gakktu í Bæinn</string>
 
     <!-- Strings related to the ConfirmArticle Fragment -->
     <string name="confirm">Confirm</string>
