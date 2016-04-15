@@ -86,6 +86,8 @@ public class HomeFragment extends Fragment {
         mannouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
         AsyncTask task = new FetchArticlesTask();
         task.execute();
+        AsyncTask getGenders = new FetchGenderTask();
+        getGenders.execute();
 
         // Inflate the layout for this fragment
         return rootView;
@@ -107,6 +109,22 @@ public class HomeFragment extends Fragment {
 
         }
 
+    }
+
+    private class FetchGenderTask extends AsyncTask<Object, Void, List<Gender>>{
+        List genderList = new ArrayList<Gender>();
+
+        @Override
+        protected List<Gender> doInBackground(Object... params){
+            try{
+                genderList = GenderFetcher.get();
+                Log.e("success", genderList.toString());
+            }
+            catch (IOException e){
+                Log.e("error", e.toString());
+            }
+            return genderList;
+        }
     }
 
     @Override

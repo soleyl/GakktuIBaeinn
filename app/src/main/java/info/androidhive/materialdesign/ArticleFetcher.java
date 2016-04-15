@@ -21,9 +21,6 @@ public class ArticleFetcher {
 
     private static final String TAG = "testing";
 
-    //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
-    private String nGrokURL = "http://56b4c417.ngrok.io";
-
     public List<Article> fetchArticles (){
         List<Article> articles = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package info.androidhive.materialdesign;
 
-import android.util.Log;
 import java.io.IOException;
 import info.androidhive.materialdesign.model.Article;
 import okhttp3.MediaType;
@@ -15,9 +14,6 @@ import okhttp3.Response;
 public class PostArticle {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
-
-    //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
-    private String nGrokURL = "http://56b4c417.ngrok.io/articles/";
 
     OkHttpClient client = new OkHttpClient();
 

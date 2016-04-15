@@ -14,12 +14,15 @@ public class GenderFetcher {
     OkHttpClient client = new OkHttpClient();
 
     String run(String url) throws IOException {
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder()
+                .url(url)
+                .header("Authorization", Utils.authentication())
+                .build();
         Response response = client.newCall(request).execute();
         return response.body().string();
     }
 
-    public List<Gender> get() throws IOException{
+    public static List<Gender> get() throws IOException{
         GenderFetcher genderFetcher = new GenderFetcher();
         String response = genderFetcher.run(Utils.url() +"/genders");
         String TAG = "testingServer";
