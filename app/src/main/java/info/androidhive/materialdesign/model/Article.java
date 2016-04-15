@@ -9,7 +9,8 @@ import java.util.Date;
 public class Article {
     private String id;
     private String title;
-    private String URL;
+    private String image;
+    private String intro; //The first few words of the longer Content string.
     private Category category;
     private Language language;
     private String content;
@@ -18,27 +19,47 @@ public class Article {
     private int rating;
     private int numberOfRatings;
 
-    public Article(){
+    public Article() {
 
     }
 
-    public void setTitle(String t){
-        title =t;
+    public void setTitle(String t) {
+        title = t;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public void setContent(String c){
-        content=c;
+    public void setContent(String c) {
+        content = c;
+        setIntro(c);
     }
 
-    public String getContent(){
+    public String getContent() {
         return content;
     }
 
-    public void setURL(String u) { URL=u;}
+    public void setImage(String i) {
+        image = i;
+    }
 
-    public String getURL() { return URL;}
+    public String getImage() {
+        return image;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    private void setIntro(String c) {
+        String subString;
+        if (c.length() > 50)
+        {
+            subString = c.substring(0, 49);
+            subString=subString + "...";
+        }
+        else {subString = c;}
+        intro = subString;
+    }
 }

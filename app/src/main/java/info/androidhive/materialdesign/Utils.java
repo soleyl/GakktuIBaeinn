@@ -6,7 +6,7 @@ package info.androidhive.materialdesign;
 public class Utils {
     public static String url(){
         //This is where we should store our ngrok address for now
-        return "https://449f8e61.ngrok.io";
+        return "http://8fd4be66.ngrok.io";
     }
 
     public static String setKeyValuePair(String key, String value){

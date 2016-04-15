@@ -21,9 +21,6 @@ public class ArticleFetcher {
 
     private static final String TAG = "testing";
 
-    //NOTE: THIS VARIABLE MUST BE UPDATED EACH TIME NGROK IS INVOKED
-    private String nGrokURL = "http://56b4c417.ngrok.io";
-
     public List<Article> fetchArticles (){
         List<Article> articles = new ArrayList<>();
 
@@ -77,14 +74,16 @@ public class ArticleFetcher {
         JSONArray articleJsonArray = jsonBody.getJSONArray("results");
 
         for (int i=0; i < articleJsonArray.length(); i++) {
-            JSONObject genderJsonObject = articleJsonArray.getJSONObject(i);
+            JSONObject articleJsonObject = articleJsonArray.getJSONObject(i);
 
-            String articleTitle = genderJsonObject.getString("title");
-            String articleContent = genderJsonObject.getString("content");
+            String articleTitle = articleJsonObject.getString("title");
+            String articleContent = articleJsonObject.getString("content");
+            String articleImage = articleJsonObject.getString("image");
 
             Article article = new Article();
             article.setTitle(articleTitle);
             article.setContent(articleContent);
+            article.setImage(articleImage);
 
             articles.add(article);
 
