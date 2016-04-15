@@ -9,6 +9,7 @@ import java.util.Date;
 public class Article {
     private String id;
     private String title;
+    private String URL;
     private Category category;
     private Language language;
     private String content;
@@ -36,4 +37,8 @@ public class Article {
     public String getContent(){
         return content;
     }
+
+    public void setURL(String u) { URL=u;}
+
+    public String getURL() { return URL;}
 }
