@@ -68,9 +68,11 @@
     <string name="cancel">Cancel</string>
     <string name="hint_article_title">Your Title Here</string>
     <string name="hint_article_body">Your Content Here</string>
+    <string name="article_category_instructions_text">Categorize Your Article:</string>
 
     <!-- Strings for Mentor Fragment -->
     <string name="default_mentor_message">Messaging not available yet</string>
+    <string name="email_subject_text">Message from Gakktu í Bæinn</string>
 
     <!-- Strings related to the ConfirmArticle Fragment -->
     <string name="confirm">Confirm</string>
@@ -89,5 +91,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Strings for CategorySelector Fragment -->
+    <string name="category_selector_name_text">Children</string>
+    <string name="label_for_category_seek_bar">TestLabel</string>
+
+    <!-- Strings for Article Fragment -->
+    <string name="fullArticleToView">fullarticletoview</string>
+
+
 
 </resources>

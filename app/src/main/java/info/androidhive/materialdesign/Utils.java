@@ -10,7 +10,7 @@ import info.androidhive.materialdesign.model.Credential;
 public class Utils {
     public static String url(){
         //This is where we should store our ngrok address for now
-        return "http://f0adce79.ngrok.io";
+        return "http://8fd4be66.ngrok.io";
     }
 
     public static String authentication(){

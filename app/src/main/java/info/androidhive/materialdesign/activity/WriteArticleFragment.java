@@ -6,17 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import info.androidhive.materialdesign.ArticleFetcher;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.adapter.CategorySelectorAdapter;
+import info.androidhive.materialdesign.model.Category;
+
 import android.content.SharedPreferences;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 /**
@@ -84,6 +86,23 @@ public class WriteArticleFragment extends Fragment {
         //Display the old Article data so User can edit it.
         if (localStoredArticleTitle != null){ mWriteArticleEditTitle.setText(localStoredArticleTitle);}
         if (localStoredArticleBody != null){ mWriteArticleEditBody.setText(localStoredArticleBody);}
+
+        // --------------------- CATEGORY SELECTOR LIST VIEW ---------------------------//
+
+        Category children = new Category();
+        children.setName("Children");
+        Category employment = new Category();
+        employment.setName("Employment");
+        Category disability = new Category();
+        disability.setName("Disability");
+        Category citizenship = new Category();
+        citizenship.setName("Citizenship");
+
+        Category[] categories = {children, employment, disability, citizenship};
+        ListAdapter categorySelectorAdapter = new CategorySelectorAdapter(getActivity(),categories);
+        ListView categorySelectorListView = (ListView) rootView.findViewById(R.id.category_selector_list_view);
+        categorySelectorListView.setAdapter(categorySelectorAdapter);
+
 
         // ---------------------- SAVE BUTTON ------------------------------------------//
         mSaveButton = (Button) rootView.findViewById(R.id.write_article_save_button);

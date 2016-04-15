@@ -6,30 +6,19 @@ package info.androidhive.materialdesign.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import info.androidhive.materialdesign.ArticleFetcher;
-import info.androidhive.materialdesign.GenderFetcher;
 import info.androidhive.materialdesign.R;
-import info.androidhive.materialdesign.model.Article;
-import info.androidhive.materialdesign.model.Gender;
-
 
 public class HomeFragment extends Fragment {
 
-    private TextView mannouncement1TextView;
-    private TextView mannouncement2TextView;
-    private List<Article> mArticles;
+    private TextView mAnnouncement1TextView;
+    private TextView mAnnouncement2TextView;
     String TAG= "testing";
 
     public HomeFragment() {
@@ -56,76 +45,70 @@ public class HomeFragment extends Fragment {
             messageToDisplay = getString(R.string.text_announcement1_completed);
         }
 
-        mannouncement1TextView.setText(messageToDisplay);
+        mAnnouncement1TextView.setText(messageToDisplay);
 
     }
-
-
-    private void setAnnouncement2(List<Article> articles){
-        int indexOfNewestArticle= articles.size()-1;
-        Article newestArticle = articles.get(indexOfNewestArticle);
-        String newestArticleTitle = newestArticle.getTitle();
-        mannouncement2TextView.setText(newestArticleTitle);
-
-        Log.i(TAG, "refreshedData in Home Fragment");
-
-        }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        Log.i(TAG, "inside createView");
 
-        //Display first announcement, based on Status of Survey
-        mannouncement1TextView = (TextView) rootView.findViewById(R.id.announcement1);
+        //Display 1st announcement, based on Status of Survey
+        mAnnouncement1TextView = (TextView) rootView.findViewById(R.id.announcement1);
         setAnnouncement1();
 
+        //Display 2nd announcement, based on newest Article found in DB.
+        mAnnouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
+        //If there is at least 1 article found, display its Title
+        if (((MainActivity)getActivity()).articlesExist()==true){
+            String newestArticleTitle = ((MainActivity)getActivity()).getNewestArticleTitle();
+            mAnnouncement2TextView.setText(newestArticleTitle);
+        }
         //Display 2nd announcement.
-        mannouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
-        AsyncTask task = new FetchArticlesTask();
-        task.execute();
-        AsyncTask getGenders = new FetchGenderTask();
-        getGenders.execute();
+        //mannouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
+        //AsyncTask task = new FetchArticlesTask();
+        //task.execute();
+        //AsyncTask getGenders = new FetchGenderTask();
+        //getGenders.execute();
 
         // Inflate the layout for this fragment
         return rootView;
     }
 
-    private class FetchArticlesTask extends AsyncTask<Object, Void, List<Article>>{
-
-        @Override
-        protected List<Article> doInBackground(Object... params){
-            return new ArticleFetcher().fetchArticles();
-
-        }
-
-        @Override
-        protected void onPostExecute(List<Article> articles){
-            mArticles = articles;
-            //If we found at least 1 article on the server, let's update our View/Fragment
-            if(mArticles.size() >0) {setAnnouncement2(mArticles);}
-
-        }
-
-    }
-
-    private class FetchGenderTask extends AsyncTask<Object, Void, List<Gender>>{
-        List genderList = new ArrayList<Gender>();
-
-        @Override
-        protected List<Gender> doInBackground(Object... params){
-            try{
-                genderList = GenderFetcher.get();
-                Log.e("success", genderList.toString());
-            }
-            catch (IOException e){
-                Log.e("error", e.toString());
-            }
-            return genderList;
-        }
-    }
+//    private class FetchArticlesTask extends AsyncTask<Object, Void, List<Article>>{
+//
+//        @Override
+//        protected List<Article> doInBackground(Object... params){
+//            return new ArticleFetcher().fetchArticles();
+//
+//        }
+//
+//        @Override
+//        protected void onPostExecute(List<Article> articles){
+//            mArticles = articles;
+//            //If we found at least 1 article on the server, let's update our View/Fragment
+//            if(mArticles.size() >0) {setAnnouncement2(mArticles);}
+//
+//        }
+//
+//    }
+//
+//    private class FetchGenderTask extends AsyncTask<Object, Void, List<Gender>>{
+//        List genderList = new ArrayList<Gender>();
+//
+//        @Override
+//        protected List<Gender> doInBackground(Object... params){
+//            try{
+//                genderList = GenderFetcher.get();
+//                Log.e("success", genderList.toString());
+//            }
+//            catch (IOException e){
+//                Log.e("error", e.toString());
+//            }
+//            return genderList;
+//        }
+//    }
 
     @Override
     public void onAttach(Activity activity) {
