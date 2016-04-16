@@ -48,7 +48,7 @@
     <string name="survey_started_status">started</string>
     <string name="survey_completed_status">completed</string>
     <string name="home_fragment_tag">homeTag</string>
-    <string name="static_announcement_2_text">NEWEST ARTICLE:</string>
+    <string name="static_announcement_2_text">Check out the newest Article in our Library:</string>
     <string name="placeholder_new_article_title">...gathering data...</string>
 
     <!-- Strings related to the Survey Fragment -->
