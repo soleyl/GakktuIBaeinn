@@ -49,6 +49,7 @@ public class ConfirmArticleFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.remove("title")
                 .remove("body")
+                .remove("image")
                 .apply();
 
     }
@@ -64,6 +65,8 @@ public class ConfirmArticleFragment extends Fragment {
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         final String title = sharedPref.getString("title", "null");
         final String body = sharedPref.getString("body", "null");
+        final String image = sharedPref.getString("image", "null");
+
         mArticleToConfirmTitleTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_title);
         mArticleToConfirmTitleTextView.setText(title);
         mArticleToConfirmBodyTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_body);
@@ -84,6 +87,7 @@ public class ConfirmArticleFragment extends Fragment {
                 Article articleForDB = new Article();
                 articleForDB.setTitle(title);
                 articleForDB.setContent(body);
+                articleForDB.setImage(image);
                 AsyncTask paTask = new PostArticleTask(articleForDB);
                 paTask.execute();
                 Toast.makeText(getActivity(),"Article saved to Database", Toast.LENGTH_SHORT).show();
@@ -130,11 +134,8 @@ public class ConfirmArticleFragment extends Fragment {
                 HomeFragment homeFrag = new HomeFragment();
                 fragmentTransaction.replace(R.id.container_body,homeFrag);
                 fragmentTransaction.commit();
-
-
             }
         });
-
 
         // Inflate the layout for this fragment
         return rootView;
