@@ -23,6 +23,8 @@ import info.androidhive.materialdesign.model.Article;
  */
 public class ArticleAdapter extends ArrayAdapter<Article> {
 
+    View mArticleLoadingPanel;
+
     //Generic constructor
     public ArticleAdapter(Context context, List<Article> articles) {
         super(context, R.layout.article_row, articles);
@@ -38,6 +40,9 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         String articleTitleItem = articleItem.getTitle();
         String imageUrlString = articleItem.getImage();
         String articleIntroItem = articleItem.getIntro();
+
+        //Display a Loading Panel while Image is uploaded
+        mArticleLoadingPanel = articleView.findViewById(R.id.articleRowLoadingPanel);
 
         //Load title into View
         TextView article_title = (TextView) articleView.findViewById(R.id.article_title);
@@ -77,6 +82,8 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+            mArticleLoadingPanel.setVisibility(View.GONE);
         }
     }
 

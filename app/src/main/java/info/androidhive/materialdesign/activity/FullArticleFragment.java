@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +30,7 @@ public class FullArticleFragment extends Fragment {
     TextView mSelectedArticleTitleView;
     TextView mSelectedArticleContentView;
     ImageView mSelectedArticleImageView;
+    View mSelectedArticleLoadingPanel;
 
     public FullArticleFragment() {
         // Required empty public constructor
@@ -52,6 +52,7 @@ public class FullArticleFragment extends Fragment {
         final int articleSelected = sharedPref.getInt("articleSelected", 0);
         Article ourArticle= ((MainActivity) getActivity()).getArticle(articleSelected);
 
+        mSelectedArticleLoadingPanel = rootView.findViewById(R.id.loadingPanel);
         //Display the Image for this Article
         String ourImageUrlString = ourArticle.getImage();
         mSelectedArticleImageView = (ImageView) rootView.findViewById(R.id.full_article_image_view);
@@ -91,6 +92,8 @@ public class FullArticleFragment extends Fragment {
         }
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+            mSelectedArticleLoadingPanel.setVisibility(View.GONE);
         }
     }
 

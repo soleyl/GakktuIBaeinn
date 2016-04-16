@@ -18,7 +18,6 @@ import info.androidhive.materialdesign.model.Category;
 
 import android.content.SharedPreferences;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 /**

@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             }
             List<Article> articles = new ArrayList<>();
             try{
-                Log.e("from MainActivity", articlesJSON.toString());
                 articles = Utils.parseArticles(articlesJSON);
             }
             catch(JSONException je){
@@ -162,12 +161,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
-        Log.e(TAG,"onDrawerItemSelected");
         displayView(position);
     }
 
     private void displayView(int position) {
-        Log.e(TAG,"displayView");
         Fragment fragment = null;
         String title = getString(R.string.app_name);
         switch (position) {
