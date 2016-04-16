@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -19,10 +18,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import info.androidhive.materialdesign.ArticleFetcher;
+import info.androidhive.materialdesign.API;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.Utils;
 import info.androidhive.materialdesign.model.Article;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
@@ -83,7 +88,23 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         @Override
         protected List<Article> doInBackground(Object... params){
-            return new ArticleFetcher().fetchArticles();
+            //return new ArticleFetcher().fetchArticles();
+            JSONObject articlesJSON = new JSONObject();
+            try{
+                articlesJSON = API.get("articles", getAuthentication());
+            }
+            catch(IOException e){
+                Log.e("error", "fetching articles");
+            }
+            List<Article> articles = new ArrayList<>();
+            try{
+                Log.e("from MainActivity", articlesJSON.toString());
+                articles = Utils.parseArticles(articlesJSON);
+            }
+            catch(JSONException je){
+                Log.e(TAG, "Failed to parse JSON", je);
+            }
+            return articles;
 
         }
 
@@ -94,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,8 +130,14 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private String getLoggedInUser(){
         SharedPreferences sharedPref = getSharedPreferences(
                 getString(R.string.loggedInUser), Context.MODE_APPEND);
-        String userName = sharedPref.getString("userName", "null");
-        return userName;
+        return sharedPref.getString("userName", "null");
+
+    }
+
+    private String getAuthentication(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.loggedInUser), Context.MODE_APPEND);
+       return sharedPref.getString("authentication", "null");
     }
 
     @Override
@@ -168,9 +194,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             case 5:
                 fragment = new WriteArticleFragment();
                 title = getString(R.string.title_write_article);
+                break;
             case 6:
                 fragment = new LogInFragment();
                 title = getString(R.string.title_login);
+                break;
             default:
                 break;
         }

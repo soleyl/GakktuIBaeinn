@@ -13,7 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import info.androidhive.materialdesign.PostArticle;
+
+import info.androidhive.materialdesign.API;
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.model.Article;
 import android.content.SharedPreferences;
@@ -154,13 +155,21 @@ public class ConfirmArticleFragment extends Fragment {
         protected String doInBackground(Object... params){
             String s ="";
             try{
-                PostArticle pa = new PostArticle();
-                s = pa.postarticle(TasksArticle);
+                API api = new API();
+                s=api.postArticle(TasksArticle,getAuthentication());
+                //PostArticle pa = new PostArticle();
+                //s = pa.postarticle(TasksArticle);
             }
             catch(IOException e){
                 Log.e("error", "Error in AsyncTask");
             }
             return s;
+        }
+
+        private String getAuthentication(){
+            SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                    getString(R.string.loggedInUser), Context.MODE_APPEND);
+            return sharedPref.getString("authentication", "null");
         }
 
         @Override

@@ -3,7 +3,6 @@ package info.androidhive.materialdesign.adapter;
 /**
  * Created by Ravi on 29/07/15.
  */
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;

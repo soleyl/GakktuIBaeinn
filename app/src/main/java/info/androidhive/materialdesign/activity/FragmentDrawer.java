@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -129,21 +128,18 @@ public class FragmentDrawer extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(getActivity(), drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                Log.e(TAG,"drawer opened");
                 super.onDrawerOpened(drawerView);
                 getActivity().invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                Log.e(TAG,"drawer closed");
                 super.onDrawerClosed(drawerView);
                 getActivity().invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                Log.e(TAG,"drawer slide");
                 super.onDrawerSlide(drawerView, slideOffset);
                 toolbar.setAlpha(1 - slideOffset / 2);
             }

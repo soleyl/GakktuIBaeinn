@@ -1,7 +1,5 @@
 package info.androidhive.materialdesign;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.squareup.okhttp.Credentials;
@@ -31,11 +29,11 @@ public class API {
         return client.newCall(request).execute();
     }
 
-    String post(String url, String json) throws IOException{
+    String post(String url, String json, String authentication) throws IOException{
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(url)
-                .header("Authorization", Utils.authentication())
+                .header("Authorization", authentication)
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -57,22 +55,23 @@ public class API {
         Response response = api.run(Utils.url() +"/" + objectType, authentication);
         JSONObject responseJSON = new JSONObject();
         try{
-            responseJSON = new JSONObject(response.body().toString());
+            responseJSON = new JSONObject(response.body().string());
         }
         catch(JSONException j){
-            Log.e("error", j.toString());
+            Log.e("errorInGet", j.toString());
         }
+
         return responseJSON;
     }
 
 
-    public String postArticle(Article article) throws IOException{
+    public String postArticle(Article article, String authentication) throws IOException{
         API api = new API();
         String titleData = article.getTitle();
         String contentData = article.getContent();
         String json = Utils.finalizedJsonString(
                 Utils.setKeyValuePair("title", titleData)
                         + "," + Utils.setKeyValuePair("content", contentData));
-        return api.post(Utils.url() + "/articles/", json);
+        return api.post(Utils.url() + "/articles/", json, authentication);
     }
 }
