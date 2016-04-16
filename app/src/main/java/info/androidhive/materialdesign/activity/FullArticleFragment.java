@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class FullArticleFragment extends Fragment {
 
     TextView mSelectedArticleTitleView;
     TextView mSelectedArticleContentView;
+    ImageView mSelectedArticleImageView;
 
     public FullArticleFragment() {
         // Required empty public constructor
@@ -52,8 +54,8 @@ public class FullArticleFragment extends Fragment {
 
         //Display the Image for this Article
         String ourImageUrlString = ourArticle.getImage();
-        ImageView full_article_image_view = (ImageView) rootView.findViewById(R.id.full_article_image_view);
-        new DownloadImageTask(full_article_image_view)
+        mSelectedArticleImageView = (ImageView) rootView.findViewById(R.id.full_article_image_view);
+        new DownloadImageTask(mSelectedArticleImageView)
                 .execute(ourImageUrlString);
         //Display the Title
         String ourTitle = ourArticle.getTitle();
@@ -62,6 +64,7 @@ public class FullArticleFragment extends Fragment {
         //Display the Content
         String ourContent = ourArticle.getContent();
         mSelectedArticleContentView = (TextView) rootView.findViewById(R.id.full_article_content);
+        mSelectedArticleContentView.setMovementMethod(new ScrollingMovementMethod());
         mSelectedArticleContentView.setText(ourContent);
 
         // Inflate the layout for this fragment
@@ -82,10 +85,12 @@ public class FullArticleFragment extends Fragment {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
             } catch (Exception e) {
-                Log.e("Error", e.getMessage());
                 e.printStackTrace();
             }
             return mIcon11;
+        }
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 

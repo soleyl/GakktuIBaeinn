@@ -30,7 +30,7 @@
     <!-- Horizontal Line to separate Title from Content -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="2dp"
         android:id="@+id/horizontal_line"
         android:layout_marginRight="3dp"
         android:layout_marginLeft="3dp"
@@ -43,6 +43,8 @@
         android:id="@+id/full_article_content"
         android:layout_below="@id/horizontal_line"
         android:layout_margin="7dp"
+        android:maxLines="250"
+        android:scrollbars="vertical"
         />
 
 </RelativeLayout>

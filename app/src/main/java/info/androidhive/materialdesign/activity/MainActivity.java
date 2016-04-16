@@ -1,16 +1,22 @@
 package info.androidhive.materialdesign.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -22,15 +28,19 @@ import info.androidhive.materialdesign.model.Article;
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
     private static String TAG = MainActivity.class.getSimpleName();
-
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     private List<Article> mArticles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Allow for Networking on Main Thread - Will only use for the User/Password Authentication
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         AsyncTask task = new FetchArticlesTask();
         task.execute();
@@ -48,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         // display the first navigation drawer view on app launch
         displayView(0);
     }
+
 
     public boolean articlesExist() {
         if (mArticles==null) { return false;}
@@ -85,12 +96,22 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     }
 
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        //Update the Displayed UserName, if User is Logged in
+        TextView userNameTextView = (TextView) findViewById(R.id.user_logged_in_status_text_view);
+        String userName = getLoggedInUser();
+        if (userName != "null"){userNameTextView.setText(userName);}
+        else {userNameTextView.setText(R.string.not_logged_in_text);}
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private String getLoggedInUser(){
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.loggedInUser), Context.MODE_APPEND);
+        String userName = sharedPref.getString("userName", "null");
+        return userName;
     }
 
     @Override
@@ -115,10 +136,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
+        Log.e(TAG,"onDrawerItemSelected");
         displayView(position);
     }
 
     private void displayView(int position) {
+        Log.e(TAG,"displayView");
         Fragment fragment = null;
         String title = getString(R.string.app_name);
         switch (position) {
@@ -145,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             case 5:
                 fragment = new WriteArticleFragment();
                 title = getString(R.string.title_write_article);
+            case 6:
+                fragment = new LogInFragment();
+                title = getString(R.string.title_login);
             default:
                 break;
         }

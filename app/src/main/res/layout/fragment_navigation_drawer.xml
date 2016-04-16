@@ -15,8 +15,19 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:src="@drawable/ic_profile"
+            android:id="@+id/user_profile_image"
             android:scaleType="fitCenter"
             android:layout_centerInParent="true" />
+        <TextView
+            android:id="@+id/user_logged_in_status_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/not_logged_in_text"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_below="@+id/user_profile_image"/>
 
     </RelativeLayout>
 
@@ -27,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/nav_header_container"
         android:layout_marginTop="15dp" />
+
 
 
 </RelativeLayout>

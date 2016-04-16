@@ -3,7 +3,9 @@ package info.androidhive.materialdesign.adapter;
 /**
  * Created by Ravi on 29/07/15.
  */
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -43,7 +45,22 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public void onBindViewHolder(MyViewHolder holder, int position) {
         NavDrawerItem current = data.get(position);
         holder.title.setText(current.getTitle());
+        //Minor Hack to allow us to flip-flip between "LogIn" and "LogOut" titles
+        if (position==6 && loggedIn())
+        {
+            holder.title.setText(R.string.action_log_out);
+        }
     }
+
+    private boolean loggedIn(){
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                "loggedInUser", Context.MODE_APPEND);
+        String userName = sharedPref.getString("userName", "null");
+        if (userName!=null){return true;}
+        else {return false;}
+    }
+
+
 
     @Override
     public int getItemCount() {

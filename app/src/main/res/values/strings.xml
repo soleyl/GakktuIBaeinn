@@ -12,6 +12,8 @@
     <string name="nav_item_survey">Survey</string>
     <string name="nav_item_mentors">Mentors</string>
     <string name="nav_item_write_article">Write An Article</string>
+    <string name="nav_item_log_in">Log In</string>
+    <string name="nav_item_log_out">Log Out</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -21,6 +23,7 @@
         <item>@string/nav_item_articles</item>
         <item>@string/nav_item_mentors</item>
         <item>@string/nav_item_write_article</item>
+        <item>@string/nav_item_log_in</item>
 
         <!-- navigation drawer item Titles  -->
     </string-array>
@@ -31,6 +34,10 @@
     <string name="title_mentors">Mentors</string>
     <string name="title_write_article">Write An Article</string>
     <string name="title_confirm_article">Confirm Your Article</string>
+    <string name="title_login">Log In</string>
+    <string name="not_logged_in_text">Not Logged In</string>
+
+
 
     <!-- Strings related to the Home Fragment -->
     <string name="homeTitleDisplay">Gakktu í Bæinn</string>
@@ -84,6 +91,7 @@
     <!-- Strings for interacting with SharedPreferences -->
     <string name="userProfilePreferences">userProfilePreferences</string>
     <string name="locallyStoredArticle">localArticle</string>
+    <string name="loggedInUser">loggedInUser</string>
 
     <!-- Strings for Profile Fragment -->
     <string name="profile_title_text">YOUR PROFILE</string>
@@ -98,7 +106,21 @@
 
     <!-- Strings for Article Fragment -->
     <string name="fullArticleToView">fullarticletoview</string>
+    <string name="title_activity_fake_login">Sign in</string>
 
+    <!-- Strings related to login -->
+    <string name="prompt_username">UserName</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_log_out">Log Out</string>
+    <string name="action_log_in">Log In</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
 
 
 </resources>
