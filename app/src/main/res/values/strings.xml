@@ -89,6 +89,7 @@
     <string name="discard">Discard</string>
     <string name="article_to_confirm_title_text">User\'s Title Here</string>
     <string name="article_to_confirm_body_text">User\'s Text Body Here</string>
+    <string name="confirm_article_header_text">Your article will appear like this.</string>
 
     <!-- Strings for interacting with SharedPreferences -->
     <string name="userProfilePreferences">userProfilePreferences</string>

@@ -3,65 +3,83 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="info.androidhive.materialdesign.activity.ConfirmArticleFragment">
-
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/article_to_confirm_title_card"
-        android:layout_gravity="center"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="2dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="@color/colorPrimary"
+        android:id="@+id/confirm_article_header"
+        android:text="@string/confirm_article_header_text"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@color/skip"
+        android:layout_marginBottom="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirm_article_header"
+        android:orientation="horizontal"
+        android:id="@+id/linear_layout_title_and_pic_preview_article"
         >
+        <!-- Article Image -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/confirm_article_image_view"
+            android:visibility="gone"
+            android:src="@drawable/loading"
+            android:layout_margin="5dp"/>
+        <!-- Spinning Icon Animation while Image is Loading -->
+        <RelativeLayout
+            android:id="@+id/confirm_article_loading_panel"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:gravity="center" >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </RelativeLayout>
+        <!-- Article Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/article_to_confirm_title"
             android:text="@string/article_to_confirm_title_text"
+            android:textStyle="bold"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginBottom="10dp"/>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/article_to_confirm_body_card"
-        android:layout_gravity="center"
+    </LinearLayout>
+    <!-- Horizontal Line to separate Title from Content -->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="2dp"
-        card_view:cardCornerRadius="10dp"
-        android:layout_below="@id/article_to_confirm_title_card"
-        card_view:cardBackgroundColor="@color/colorPrimary"
-        >
+        android:layout_height="2dp"
+        android:id="@+id/horizontal_line_preview_article"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_below="@id/linear_layout_title_and_pic_preview_article"
+        android:background="@color/colorPrimaryDark"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/article_to_confirm_body"
             android:text="@string/article_to_confirm_body_text"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
+            android:maxLines="250"
+            android:scrollbars="vertical"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginBottom="10dp"/>
-    </android.support.v7.widget.CardView>
+            android:layout_below="@id/horizontal_line_preview_article"
+            android:layout_margin="7dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/confirm_article_confirm_button"
         android:text="@string/confirm"
-        android:layout_below="@id/article_to_confirm_body_card"
+        android:layout_below="@id/article_to_confirm_body"
         android:layout_alignParentRight="true"
         android:background="@color/yes"
         android:layout_margin="10dp"
@@ -71,7 +89,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirm_article_edit_button"
         android:text="@string/edit"
-        android:layout_below="@id/article_to_confirm_body_card"
+        android:layout_below="@id/article_to_confirm_body"
         android:layout_centerHorizontal="true"
         android:background="@color/skip"
         android:layout_margin="10dp"
@@ -81,7 +99,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/confirm_article_discard_button"
         android:text="@string/discard"
-        android:layout_below="@id/article_to_confirm_body_card"
+        android:layout_below="@id/article_to_confirm_body"
         android:layout_alignParentLeft="true"
         android:background="@color/no"
         android:layout_margin="10dp"

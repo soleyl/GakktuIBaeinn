@@ -2,6 +2,8 @@ package info.androidhive.materialdesign.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import info.androidhive.materialdesign.API;
@@ -20,6 +23,7 @@ import info.androidhive.materialdesign.model.Article;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Ravi on 29/07/15.
@@ -31,7 +35,8 @@ public class ConfirmArticleFragment extends Fragment {
     private Button mConfirmButton;
     private Button mEditButton;
     private Button mDiscardButton;
-    private String TAG = "confirm article";
+    ImageView mConfirmArticleImageView;
+    View mConfirmArticleLoadingPanel;
 
     public ConfirmArticleFragment() {
         // Required empty public constructor
@@ -60,12 +65,19 @@ public class ConfirmArticleFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_confirm_article, container, false);
 
+        mConfirmArticleLoadingPanel = rootView.findViewById(R.id.confirm_article_loading_panel);
+
         // --------------------Display the Locally-Stored Article --------------------------//
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         final String title = sharedPref.getString("title", "null");
         final String body = sharedPref.getString("body", "null");
         final String image = sharedPref.getString("image", "null");
+
+        //Display the Image for this Article
+        mConfirmArticleImageView = (ImageView) rootView.findViewById(R.id.confirm_article_image_view);
+        new DownloadImageTask(mConfirmArticleImageView)
+                .execute(image);
 
         mArticleToConfirmTitleTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_title);
         mArticleToConfirmTitleTextView.setText(title);
@@ -158,8 +170,6 @@ public class ConfirmArticleFragment extends Fragment {
             try{
                 API api = new API();
                 s=api.postArticle(TasksArticle,getAuthentication());
-                //PostArticle pa = new PostArticle();
-                //s = pa.postarticle(TasksArticle);
             }
             catch(IOException e){
                 Log.e("error", "Error in AsyncTask");
@@ -179,6 +189,31 @@ public class ConfirmArticleFragment extends Fragment {
 
         }
 
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+            mConfirmArticleLoadingPanel.setVisibility(View.GONE);
+        }
     }
 
     @Override

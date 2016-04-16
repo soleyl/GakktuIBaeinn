@@ -42,7 +42,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         String articleIntroItem = articleItem.getIntro();
 
         //Display a Loading Panel while Image is uploaded
-        mArticleLoadingPanel = articleView.findViewById(R.id.articleRowLoadingPanel);
+        mArticleLoadingPanel = articleView.findViewById(R.id.article_row_loading_panel);
 
         //Load title into View
         TextView article_title = (TextView) articleView.findViewById(R.id.article_title);
@@ -54,7 +54,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         //Load Image into View
         ImageView article_image_view = (ImageView) articleView.findViewById(R.id.article_image);
-        new DownloadImageTask(article_image_view)
+        new DownloadImageTask(article_image_view, mArticleLoadingPanel)
                 .execute(imageUrlString);
 
         return articleView;
@@ -62,9 +62,11 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
+        View loadingPanel;
 
-        public DownloadImageTask(ImageView bmImage) {
+        public DownloadImageTask(ImageView bmImage, View loadingPanel) {
             this.bmImage = bmImage;
+            this.loadingPanel = loadingPanel;
         }
 
         protected Bitmap doInBackground(String... urls) {
@@ -83,7 +85,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
             bmImage.setVisibility(View.VISIBLE);
-            mArticleLoadingPanel.setVisibility(View.GONE);
+            loadingPanel.setVisibility(View.GONE);
         }
     }
 

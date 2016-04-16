@@ -1,8 +1,5 @@
 package info.androidhive.materialdesign;
 
-
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,8 +26,6 @@ public class Utils {
     }
 
     public static List<Article> parseArticles(JSONObject jsonBody) throws JSONException {
-        Log.e("json issues", "test");
-        Log.e("json issues", jsonBody.toString());
         JSONArray articleJsonArray = jsonBody.getJSONArray("results");
         List<Article> articles = new ArrayList<Article>();
 
