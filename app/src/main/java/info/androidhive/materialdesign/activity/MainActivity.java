@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         @Override
         protected void onPostExecute(List<Article> articles){
             mArticles = articles;
+            Log.e("heytroy", "data is here");
+            displayView(0);
 
         }
 

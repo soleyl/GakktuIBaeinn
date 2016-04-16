@@ -44,11 +44,6 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
     public void onBindViewHolder(MyViewHolder holder, int position) {
         NavDrawerItem current = data.get(position);
         holder.title.setText(current.getTitle());
-        //Minor Hack to allow us to flip-flip between "LogIn" and "LogOut" titles
-        if (position==6 && loggedIn())
-        {
-            holder.title.setText(R.string.action_log_out);
-        }
     }
 
     private boolean loggedIn(){

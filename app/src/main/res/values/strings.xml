@@ -12,7 +12,7 @@
     <string name="nav_item_survey">Survey</string>
     <string name="nav_item_mentors">Mentors</string>
     <string name="nav_item_write_article">Write An Article</string>
-    <string name="nav_item_log_in">Log In</string>
+    <string name="nav_item_log_in">Log In/Out</string>
     <string name="nav_item_log_out">Log Out</string>
 
     <!-- navigation drawer item labels  -->
@@ -34,7 +34,7 @@
     <string name="title_mentors">Mentors</string>
     <string name="title_write_article">Write An Article</string>
     <string name="title_confirm_article">Confirm Your Article</string>
-    <string name="title_login">Log In</string>
+    <string name="title_login">Log In/Out</string>
     <string name="not_logged_in_text">Not Logged In</string>
 
 
@@ -115,7 +115,7 @@
     <string name="prompt_username">UserName</string>
     <string name="prompt_password">Password</string>
     <string name="action_log_out">Log Out</string>
-    <string name="action_log_in">Log In</string>
+    <string name="action_log_in">Log In/Out</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
