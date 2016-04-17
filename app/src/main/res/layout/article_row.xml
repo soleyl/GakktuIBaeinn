@@ -7,8 +7,21 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:id="@+id/article_image"
-        android:src="@drawable/loading"
+        android:visibility="gone"
         android:layout_margin="5dp"/>
+    <!-- Spinning Icon Animation while Image is Loading -->
+    <RelativeLayout
+        android:id="@+id/article_row_loading_panel"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        android:gravity="center" >
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"

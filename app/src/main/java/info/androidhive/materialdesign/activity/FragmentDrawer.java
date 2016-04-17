@@ -5,6 +5,7 @@ package info.androidhive.materialdesign.activity;
  */
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -17,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import info.androidhive.materialdesign.R;
@@ -32,6 +35,7 @@ public class FragmentDrawer extends Fragment {
     private DrawerLayout mDrawerLayout;
     private NavigationDrawerAdapter adapter;
     private View containerView;
+    private TextView mLoggedInUserTextView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
 
@@ -59,17 +63,37 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // drawer labels
         titles = getActivity().getResources().getStringArray(R.array.nav_drawer_labels);
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        displayLoggedInUser();
+    }
+
+    private void displayLoggedInUser(){
+        //If User is logged in, Display their name in the upper Panel of our Drawer
+        String userName = getLoggedInUser();
+        if (userName != "null"){
+            mLoggedInUserTextView.setText(userName);
+        }
+        else{
+            //mLoggedInUserTextView.setText(R.string.not_logged_in_text);
+            mLoggedInUserTextView.setText("testing");
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflating view layout
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
+        mLoggedInUserTextView = (TextView) layout.findViewById(R.id.user_logged_in_status_text_view);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
@@ -88,6 +112,13 @@ public class FragmentDrawer extends Fragment {
         }));
 
         return layout;
+    }
+
+    private String getLoggedInUser(){
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.loggedInUser), Context.MODE_APPEND);
+        String userName = sharedPref.getString("userName", "null");
+        return userName;
     }
 
 
@@ -162,6 +193,7 @@ public class FragmentDrawer extends Fragment {
             }
             return false;
         }
+
 
         @Override
         public void onTouchEvent(RecyclerView rv, MotionEvent e) {

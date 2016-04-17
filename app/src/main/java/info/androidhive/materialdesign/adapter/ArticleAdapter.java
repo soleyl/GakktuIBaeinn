@@ -23,6 +23,8 @@ import info.androidhive.materialdesign.model.Article;
  */
 public class ArticleAdapter extends ArrayAdapter<Article> {
 
+    View mArticleLoadingPanel;
+
     //Generic constructor
     public ArticleAdapter(Context context, List<Article> articles) {
         super(context, R.layout.article_row, articles);
@@ -39,6 +41,9 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         String imageUrlString = articleItem.getImage();
         String articleIntroItem = articleItem.getIntro();
 
+        //Display a Loading Panel while Image is uploaded
+        mArticleLoadingPanel = articleView.findViewById(R.id.article_row_loading_panel);
+
         //Load title into View
         TextView article_title = (TextView) articleView.findViewById(R.id.article_title);
         article_title.setText(articleTitleItem);
@@ -49,17 +54,31 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         //Load Image into View
         ImageView article_image_view = (ImageView) articleView.findViewById(R.id.article_image);
-        new DownloadImageTask(article_image_view)
-                .execute(imageUrlString);
+        if (!(imageUrlString.equals(""))){
+            mArticleLoadingPanel.setVisibility(View.VISIBLE);
+            new DownloadImageTask(article_image_view, mArticleLoadingPanel)
+                .execute(imageUrlString);}
+        else {
+            article_image_view.setImageResource(R.drawable.stock_photo);
+            article_image_view.setVisibility(View.VISIBLE);
+        }
 
         return articleView;
     }
 
+    //This override allows us to display articles in reverse chronological order
+    @Override
+    public Article getItem(int position) {
+        return super.getItem(super.getCount() - position - 1);
+    }
+
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
+        View loadingPanel;
 
-        public DownloadImageTask(ImageView bmImage) {
+        public DownloadImageTask(ImageView bmImage, View loadingPanel) {
             this.bmImage = bmImage;
+            this.loadingPanel = loadingPanel;
         }
 
         protected Bitmap doInBackground(String... urls) {
@@ -77,6 +96,8 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         protected void onPostExecute(Bitmap result) {
             bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+            loadingPanel.setVisibility(View.GONE);
         }
     }
 

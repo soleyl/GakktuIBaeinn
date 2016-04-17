@@ -8,17 +8,28 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import info.androidhive.materialdesign.R;
 
 public class HomeFragment extends Fragment {
 
     private TextView mAnnouncement1TextView;
     private TextView mAnnouncement2TextView;
+    private ImageView mSurveyIconImage;
+    private ImageView mNewsIconImage;
+    private TextView mStaticAnnounce2;
     String TAG= "testing";
 
     public HomeFragment() {
@@ -66,6 +77,81 @@ public class HomeFragment extends Fragment {
             mAnnouncement2TextView.setText(newestArticleTitle);
         }
 
+        //Add Listener to Survey Icon Image
+        mSurveyIconImage = (ImageView) rootView.findViewById(R.id.survey_icon_image);
+        mSurveyIconImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SurveyFragment surveyFrag = new SurveyFragment();
+                fragmentTransaction.replace(R.id.container_body, surveyFrag);
+                fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Survey");
+            }
+        });
+
+        //Add Listener to Announcement 1
+        mAnnouncement1TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                SurveyFragment surveyFrag = new SurveyFragment();
+                fragmentTransaction.replace(R.id.container_body, surveyFrag);
+                fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Survey");
+            }
+        });
+
+        //Add Listener to News Icon
+        mNewsIconImage=(ImageView) rootView.findViewById(R.id.news_icon_image);
+        mNewsIconImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ArticleFragment articleFrag = new ArticleFragment();
+                fragmentTransaction.replace(R.id.container_body,articleFrag);
+                fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Articles");
+            }
+        });
+
+        //Add Listener to Announcement 2
+        mAnnouncement2TextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ArticleFragment articleFrag = new ArticleFragment();
+                fragmentTransaction.replace(R.id.container_body,articleFrag);
+                fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Articles");
+            }
+        });
+
+
+        //Add Listener to Static Portion of Announcement 2
+        mStaticAnnounce2=(TextView) rootView.findViewById(R.id.static_announcement_2);
+        mStaticAnnounce2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                ArticleFragment articleFrag = new ArticleFragment();
+                fragmentTransaction.replace(R.id.container_body,articleFrag);
+                fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Articles");
+            }
+        });
+
+
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -73,7 +159,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        Log.i(TAG, "onAttach");
     }
 
     @Override

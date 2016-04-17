@@ -4,6 +4,7 @@ package info.androidhive.materialdesign.adapter;
  * Created by Ravi on 29/07/15.
  */
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -44,6 +45,16 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         NavDrawerItem current = data.get(position);
         holder.title.setText(current.getTitle());
     }
+
+    private boolean loggedIn(){
+        SharedPreferences sharedPref = context.getSharedPreferences(
+                "loggedInUser", Context.MODE_APPEND);
+        String userName = sharedPref.getString("userName", "null");
+        if (userName!=null){return true;}
+        else {return false;}
+    }
+
+
 
     @Override
     public int getItemCount() {

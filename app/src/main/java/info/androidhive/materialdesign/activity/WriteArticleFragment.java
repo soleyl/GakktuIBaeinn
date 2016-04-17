@@ -18,7 +18,6 @@ import info.androidhive.materialdesign.model.Category;
 
 import android.content.SharedPreferences;
 import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 /**
@@ -28,6 +27,7 @@ public class WriteArticleFragment extends Fragment {
 
     private EditText mWriteArticleEditTitle;
     private EditText mWriteArticleEditBody;
+    private EditText mWriteArticleEditImage;
     private Button mSaveButton;
     private Button mCancelButton;
 
@@ -49,15 +49,18 @@ public class WriteArticleFragment extends Fragment {
         String articleTitle = mWriteArticleEditTitle.getText().toString();
         //Get Body from User's input
         String articleBody = mWriteArticleEditBody.getText().toString();
+        //Get Image from User's input.
+        String articleImage = mWriteArticleEditImage.getText().toString();
+
+
 
         //Save data locally in SharedPreferences
         SharedPreferences prefs = getActivity().getSharedPreferences(
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
-        String key = "title";
-        String key2= "body";
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, articleTitle)
-                .putString(key2,articleBody)
+        editor.putString("title", articleTitle)
+                .putString("body",articleBody)
+                .putString("image",articleImage)
                 .apply();
 
         //Move to a ConfirmArticle Fragment
@@ -76,16 +79,19 @@ public class WriteArticleFragment extends Fragment {
 
         mWriteArticleEditTitle = (EditText) rootView.findViewById(R.id.write_article_input_field_title);
         mWriteArticleEditBody = (EditText) rootView.findViewById(R.id.write_article_input_field_body);
+        mWriteArticleEditImage = (EditText) rootView.findViewById(R.id.write_article_input_field_image);
 
         //If User is returning to Edit a locally-stored article, fetch the article data
         SharedPreferences sharedPref = getActivity().getSharedPreferences(
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         String localStoredArticleTitle = sharedPref.getString("title", null);
         String localStoredArticleBody = sharedPref.getString("body", null);
+        String localStoredArticleImage = sharedPref.getString("image", null);
 
         //Display the old Article data so User can edit it.
         if (localStoredArticleTitle != null){ mWriteArticleEditTitle.setText(localStoredArticleTitle);}
         if (localStoredArticleBody != null){ mWriteArticleEditBody.setText(localStoredArticleBody);}
+        if (localStoredArticleImage != null){ mWriteArticleEditImage.setText(localStoredArticleImage);}
 
         // --------------------- CATEGORY SELECTOR LIST VIEW ---------------------------//
 
@@ -100,8 +106,8 @@ public class WriteArticleFragment extends Fragment {
 
         Category[] categories = {children, employment, disability, citizenship};
         ListAdapter categorySelectorAdapter = new CategorySelectorAdapter(getActivity(),categories);
-        ListView categorySelectorListView = (ListView) rootView.findViewById(R.id.category_selector_list_view);
-        categorySelectorListView.setAdapter(categorySelectorAdapter);
+        //ListView categorySelectorListView = (ListView) rootView.findViewById(R.id.category_selector_list_view);
+        //categorySelectorListView.setAdapter(categorySelectorAdapter);
 
 
         // ---------------------- SAVE BUTTON ------------------------------------------//

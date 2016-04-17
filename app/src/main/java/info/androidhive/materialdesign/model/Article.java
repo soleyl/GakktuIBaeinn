@@ -14,7 +14,7 @@ public class Article {
     private Category category;
     private Language language;
     private String content;
-    private Person author;
+    private String author;
     private Date originalDate;
     private int rating;
     private int numberOfRatings;

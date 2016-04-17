@@ -23,7 +23,17 @@
         android:inputType="textCapSentences|textMultiLine"
         android:scrollHorizontally="false"
         android:layout_marginRight="10dp"/>
-
+    <EditText
+        android:layout_width="match_parent"
+        android:id="@+id/write_article_input_field_image"
+        android:layout_height="100dp"
+        android:layout_below="@id/write_article_input_field_body"
+        android:layout_marginLeft="10dp"
+        android:hint="@string/hint_article_image_URL"
+        android:inputType="textCapSentences|textMultiLine"
+        android:scrollHorizontally="false"
+        android:layout_marginRight="10dp"/>
+<!--
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -48,21 +58,23 @@
         android:layout_marginTop="5dp"/>
 
 
-    <!-- A RecyclerView with some commonly used attributes -->
+
     <ListView
         android:id="@+id/category_selector_list_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_below="@id/article_category_instructions"
         android:layout_height="wrap_content"/>
+
     </LinearLayout>
+    -->
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/write_article_save_button"
         android:text="@string/save"
-        android:layout_below="@id/border_box"
+        android:layout_below="@id/write_article_input_field_image"
         android:layout_alignParentRight="true"
         android:background="@color/yes"
         android:layout_marginBottom="10dp"
@@ -73,7 +85,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/write_article_cancel_button"
         android:text="@string/cancel"
-        android:layout_below="@id/border_box"
+        android:layout_below="@id/write_article_input_field_image"
         android:layout_alignParentLeft="true"
         android:background="@color/no"
         android:layout_marginBottom="10dp"
