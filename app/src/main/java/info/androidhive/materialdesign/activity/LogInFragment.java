@@ -74,7 +74,7 @@ public class LogInFragment extends Fragment {
         mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mLogInLoadingPanel.setVisibility(View.VISIBLE);
+                //mLogInLoadingPanel.setVisibility(View.VISIBLE);
                 String attemptedUserName = mUserNameEditText.getText().toString();
                 String attemptedPassword = mPasswordEditText.getText().toString();
                 Boolean userAuthenticated = authenticateUser(attemptedUserName, attemptedPassword);
@@ -86,7 +86,6 @@ public class LogInFragment extends Fragment {
                     switchFragmentToLogOut(attemptedUserName);
                 } else {
                     //Toast the User with Error Message for failed Log In
-                    mLogInLoadingPanel.setVisibility(View.GONE);
                     Toast toast = Toast.makeText(getActivity(), "UserName or Password Incorrect", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -181,9 +180,6 @@ public class LogInFragment extends Fragment {
             Log.e(TAG,"error with Profile");
         }
 
-        //Log.e(TAG,profile.toString());
-        String as = String.valueOf(authenticationStatus);
-        mLogInLoadingPanel.setVisibility(View.GONE);
         return authenticationStatus;
     }
 

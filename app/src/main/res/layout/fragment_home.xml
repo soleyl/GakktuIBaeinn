@@ -98,6 +98,7 @@
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
             android:id="@+id/static_announcement_2"
             android:text="@string/static_announcement_2_text" />
         <TextView
@@ -109,6 +110,7 @@
             android:layout_below="@id/static_announcement_2"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginRight="5dp"
             android:gravity="center"
             android:id="@+id/announcement2"
             android:text="@string/placeholder_new_article_title" />
