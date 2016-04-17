@@ -21,6 +21,11 @@ public class Utils {
         return '\"' + key + '\"' + ": " + '\"' + value + '\"';
     }
 
+    private static String parseDate(String d){
+        String fullDate = d;
+        return fullDate.substring(0,10);
+    }
+
     public static String finalizedJsonString (String pseudoJson){
         return "{" + pseudoJson + "}";
     }
@@ -36,6 +41,8 @@ public class Utils {
             article.setTitle(articleJsonObject.getString("title"));
             article.setContent(articleJsonObject.getString("content"));
             article.setImage(articleJsonObject.getString("image"));
+            article.setAuthor(articleJsonObject.getString("author"));
+            article.setOriginalDate(parseDate(articleJsonObject.getString("created_at")));
 
             articles.add(article);
 

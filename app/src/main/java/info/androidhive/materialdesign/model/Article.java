@@ -15,7 +15,7 @@ public class Article {
     private Language language;
     private String content;
     private String author;
-    private Date originalDate;
+    private String originalDate;
     private int rating;
     private int numberOfRatings;
 
@@ -38,6 +38,22 @@ public class Article {
 
     public String getContent() {
         return content;
+    }
+
+    public void setAuthor(String a) {
+        author=a;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setOriginalDate(String d) {
+        originalDate=d;
+    }
+
+    public String getOriginalDate() {
+        return originalDate;
     }
 
     public void setImage(String i) {

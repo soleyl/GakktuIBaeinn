@@ -29,6 +29,8 @@ public class FullArticleFragment extends Fragment {
 
     TextView mSelectedArticleTitleView;
     TextView mSelectedArticleContentView;
+    TextView mSelectedArticleAuthorView;
+    TextView mSelectedArticleDate;
     ImageView mSelectedArticleImageView;
     View mSelectedArticleLoadingPanel;
 
@@ -73,6 +75,11 @@ public class FullArticleFragment extends Fragment {
         mSelectedArticleContentView = (TextView) rootView.findViewById(R.id.full_article_content);
         mSelectedArticleContentView.setMovementMethod(new ScrollingMovementMethod());
         mSelectedArticleContentView.setText(ourContent);
+        //Display the Author
+        String ourAuthor = ourArticle.getAuthor();
+        String ourDate = ourArticle.getOriginalDate();
+        mSelectedArticleDate = (TextView) rootView.findViewById(R.id.full_article_date);
+        mSelectedArticleDate.setText("Published on " + ourDate + " by " + ourAuthor);
 
         // Inflate the layout for this fragment
         return rootView;
