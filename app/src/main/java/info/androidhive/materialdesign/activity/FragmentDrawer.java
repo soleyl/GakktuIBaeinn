@@ -28,6 +28,8 @@ import android.widget.TextView;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import info.androidhive.materialdesign.R;
 import info.androidhive.materialdesign.adapter.NavigationDrawerAdapter;
 import info.androidhive.materialdesign.model.NavDrawerItem;
@@ -44,7 +46,9 @@ public class FragmentDrawer extends Fragment {
     private TextView mLoggedInUserTextView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
-    private ImageView mLoggedInUserImage;
+    //private CircleImageView mLoggedInUserImage;
+    //private ImageView mLoggedInUserImage;
+    private de.hdodenhof.circleimageview.CircleImageView mLoggedInUserImage;
 
     public FragmentDrawer() {
 
@@ -113,7 +117,10 @@ public class FragmentDrawer extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         mLoggedInUserTextView = (TextView) layout.findViewById(R.id.user_logged_in_status_text_view);
-        mLoggedInUserImage = (ImageView) layout.findViewById(R.id.user_profile_image);
+        //mLoggedInUserImage = (ImageView) layout.findViewById(R.id.user_profile_image);
+        //mLoggedInUserImage = (CircleImageView) layout.findViewById(R.id.user_profile_image);
+
+        mLoggedInUserImage = (de.hdodenhof.circleimageview.CircleImageView) layout.findViewById(R.id.user_profile_image);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);

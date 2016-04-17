@@ -141,7 +141,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
         else {
             userNameTextView.setText(R.string.not_logged_in_text);
-            userImageView.setImageResource(R.drawable.ic_profile);
+            //userImageView.setImageResource(R.drawable.ic_profile);
+            userImageView.setImageResource(R.drawable.blueman);
         }
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
