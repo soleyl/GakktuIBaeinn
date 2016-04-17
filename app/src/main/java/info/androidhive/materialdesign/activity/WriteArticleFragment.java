@@ -49,8 +49,10 @@ public class WriteArticleFragment extends Fragment {
         String articleTitle = mWriteArticleEditTitle.getText().toString();
         //Get Body from User's input
         String articleBody = mWriteArticleEditBody.getText().toString();
-        //Get Image from User's input
+        //Get Image from User's input.
         String articleImage = mWriteArticleEditImage.getText().toString();
+        //If no URL provided, set it to our default URL
+        if (articleImage.equals("")) { articleImage="https://notendur.hi.is/~tap4/gakktuImages/gakktuIcon2.png";}
 
 
         //Save data locally in SharedPreferences
