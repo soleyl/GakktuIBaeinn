@@ -6,6 +6,9 @@ package info.androidhive.materialdesign.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -13,13 +16,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import info.androidhive.materialdesign.R;
@@ -38,6 +44,7 @@ public class FragmentDrawer extends Fragment {
     private TextView mLoggedInUserTextView;
     private static String[] titles = null;
     private FragmentDrawerListener drawerListener;
+    private ImageView mLoggedInUserImage;
 
     public FragmentDrawer() {
 
@@ -70,22 +77,34 @@ public class FragmentDrawer extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        displayLoggedInUser();
     }
 
-    private void displayLoggedInUser(){
-        //If User is logged in, Display their name in the upper Panel of our Drawer
-        String userName = getLoggedInUser();
-        if (userName != "null"){
-            mLoggedInUserTextView.setText(userName);
-        }
-        else{
-            //mLoggedInUserTextView.setText(R.string.not_logged_in_text);
-            mLoggedInUserTextView.setText("testing");
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
         }
 
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+        }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,6 +113,7 @@ public class FragmentDrawer extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         mLoggedInUserTextView = (TextView) layout.findViewById(R.id.user_logged_in_status_text_view);
+        mLoggedInUserImage = (ImageView) layout.findViewById(R.id.user_profile_image);
 
         adapter = new NavigationDrawerAdapter(getActivity(), getData());
         recyclerView.setAdapter(adapter);
@@ -119,6 +139,15 @@ public class FragmentDrawer extends Fragment {
                 getString(R.string.loggedInUser), Context.MODE_APPEND);
         String userName = sharedPref.getString("userName", "null");
         return userName;
+    }
+    private String getUserAvatar(){
+        return "https://upload.wikimedia.org/wikipedia/commons/6/6d/Round_4_wheel_2012_by_wheelgenius.png";
+        /*
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.userAvatar), Context.MODE_APPEND);
+        String userAvatar = sharedPref.getString("url", "null");
+        return userAvatar;
+        */
     }
 
 

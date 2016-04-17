@@ -25,7 +25,7 @@ public class API {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        Log.e("our request", request.toString());
+        Log.e("our request run", request.toString());
         return client.newCall(request).execute();
     }
 
@@ -34,7 +34,7 @@ public class API {
                 .url(url)
                 .header("Authorization", authentication)
                 .build();
-        Log.e("our request", request.toString());
+        Log.e("our request verified", request.toString());
         return client.newCall(request).execute();
     }
 

@@ -2,6 +2,8 @@ package info.androidhive.materialdesign.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +72,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public boolean articlesExist() {
         if (mArticles==null) { return false;}
         else return true;
+    }
+
+    public int getNumberOfArticles(){
+        return mArticles.size();
     }
 
     public List<Article> getArticles(){
@@ -121,9 +129,21 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public boolean onCreateOptionsMenu(Menu menu) {
         //Update the Displayed UserName, if User is Logged in
         TextView userNameTextView = (TextView) findViewById(R.id.user_logged_in_status_text_view);
+        ImageView userImageView = (ImageView) findViewById(R.id.user_profile_image);
         String userName = getLoggedInUser();
-        if (userName != "null"){userNameTextView.setText(userName);}
-        else {userNameTextView.setText(R.string.not_logged_in_text);}
+        String userAvatar = getUserAvatar();
+        if (userName != "null")
+        {
+            userNameTextView.setText(userName);
+            new DownloadAvatarTask(userImageView)
+                    .execute(userAvatar);
+
+        }
+        else {
+            userNameTextView.setText(R.string.not_logged_in_text);
+            userImageView.setImageResource(R.drawable.ic_profile);
+        }
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -133,6 +153,33 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 getString(R.string.loggedInUser), Context.MODE_APPEND);
         return sharedPref.getString("userName", "null");
 
+    }
+
+
+    private class DownloadAvatarTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadAvatarTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+            bmImage.setVisibility(View.VISIBLE);
+        }
     }
 
     private String getAuthentication(){
@@ -164,6 +211,16 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     @Override
     public void onDrawerItemSelected(View view, int position) {
         displayView(position);
+    }
+
+    private String getUserAvatar(){
+        //return "https://upload.wikimedia.org/wikipedia/commons/6/6d/Round_4_wheel_2012_by_wheelgenius.png";
+
+        SharedPreferences sharedPref = getSharedPreferences(
+                getString(R.string.user_profile), Context.MODE_APPEND);
+        String userAvatar = sharedPref.getString("avatar", "null");
+        return userAvatar;
+
     }
 
     private void displayView(int position) {

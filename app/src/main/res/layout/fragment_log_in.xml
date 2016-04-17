@@ -23,12 +23,25 @@
         android:id="@+id/login_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <!-- Spinning Icon Animation while Image is Loading -->
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/log_in_loading_panel"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:visibility="gone"
+                android:gravity="center" >
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true" />
+            </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

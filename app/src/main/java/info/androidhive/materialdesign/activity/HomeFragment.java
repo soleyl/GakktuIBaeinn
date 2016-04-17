@@ -73,6 +73,8 @@ public class HomeFragment extends Fragment {
         mAnnouncement2TextView = (TextView) rootView.findViewById(R.id.announcement2);
         //If there is at least 1 article found, display its Title
         if (((MainActivity)getActivity()).articlesExist()==true){
+            int length = ((MainActivity)getActivity()).getNumberOfArticles();
+            Log.e("#0fArts", String.valueOf(length));
             String newestArticleTitle = ((MainActivity)getActivity()).getNewestArticleTitle();
             mAnnouncement2TextView.setText(newestArticleTitle);
         }
@@ -85,10 +87,11 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 SurveyFragment surveyFrag = new SurveyFragment();
-                fragmentTransaction.replace(R.id.container_body, surveyFrag);
+                fragmentTransaction.replace(R.id.container_body, surveyFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
                 ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 actionBar.setTitle("Survey");
+
             }
         });
 
@@ -99,7 +102,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 SurveyFragment surveyFrag = new SurveyFragment();
-                fragmentTransaction.replace(R.id.container_body, surveyFrag);
+                fragmentTransaction.replace(R.id.container_body, surveyFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
                 ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 actionBar.setTitle("Survey");
@@ -114,7 +117,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ArticleFragment articleFrag = new ArticleFragment();
-                fragmentTransaction.replace(R.id.container_body,articleFrag);
+                fragmentTransaction.replace(R.id.container_body,articleFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
                 ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 actionBar.setTitle("Articles");
@@ -128,7 +131,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ArticleFragment articleFrag = new ArticleFragment();
-                fragmentTransaction.replace(R.id.container_body,articleFrag);
+                fragmentTransaction.replace(R.id.container_body,articleFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
                 ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 actionBar.setTitle("Articles");
@@ -144,7 +147,7 @@ public class HomeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ArticleFragment articleFrag = new ArticleFragment();
-                fragmentTransaction.replace(R.id.container_body,articleFrag);
+                fragmentTransaction.replace(R.id.container_body,articleFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
                 ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
                 actionBar.setTitle("Articles");

@@ -19,7 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Credentials;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.List;
 
 import info.androidhive.materialdesign.API;
 import info.androidhive.materialdesign.R;
@@ -32,6 +38,8 @@ public class LogInFragment extends Fragment {
     Button mLogOutButton;
     CardView mLogInSuccessCard;
     TextView mLogInSuccessText;
+    View mLogInLoadingPanel;
+
 
     String TAG= "login";
 
@@ -56,6 +64,8 @@ public class LogInFragment extends Fragment {
         mLogOutButton = (Button) rootView.findViewById(R.id.log_out_button);
         mLogInSuccessCard = (CardView) rootView.findViewById(R.id.log_in_success_confirmation_card_view);
         mLogInSuccessText = (TextView) rootView.findViewById(R.id.log_in_success_confirmation_text);
+        //Display a Loading Panel while Credentials are Verified
+        mLogInLoadingPanel = rootView.findViewById(R.id.log_in_loading_panel);
 
         String loggedInUser = getLoggedInUser();
 
@@ -64,18 +74,21 @@ public class LogInFragment extends Fragment {
         mLogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mLogInLoadingPanel.setVisibility(View.VISIBLE);
                 String attemptedUserName = mUserNameEditText.getText().toString();
                 String attemptedPassword = mPasswordEditText.getText().toString();
                 Boolean userAuthenticated = authenticateUser(attemptedUserName, attemptedPassword);
                 if (userAuthenticated) {
                     //Store the successful logIn Credentials
-                    setLoggedInUser(attemptedUserName,attemptedPassword);
+                    setLoggedInUser(attemptedUserName, attemptedPassword);
+                    JSONObject userProfile = getUserProfile();
+                    saveUserProfileToSharedPreferences(userProfile);
                     switchFragmentToLogOut(attemptedUserName);
                 } else {
                     //Toast the User with Error Message for failed Log In
+                    mLogInLoadingPanel.setVisibility(View.GONE);
                     Toast toast = Toast.makeText(getActivity(), "UserName or Password Incorrect", Toast.LENGTH_LONG);
                     toast.show();
-
                 }
 
             }
@@ -102,6 +115,33 @@ public class LogInFragment extends Fragment {
         return rootView;
     }
 
+    private void saveUserProfileToSharedPreferences(JSONObject profile){
+        String avatar="";
+        //String languages = new List<String>;
+        JSONArray results=new JSONArray();
+        try {
+            results = profile.getJSONArray("results");
+        }
+        catch (JSONException j){
+            Log.e("first JSON", "error");
+        }
+
+        try{
+            JSONObject profileObject=results.getJSONObject(0);
+            avatar = profileObject.getString("avatar");}
+        catch(JSONException j){
+            Log.e("getting Avatar", "error");
+        }
+        Log.e("profile", profile.toString());
+        Log.e("results", results.toString());
+        Log.e("varat", avatar);
+        SharedPreferences prefs = getActivity().getSharedPreferences(
+                getString(R.string.user_profile), Context.MODE_APPEND);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("avatar", avatar)
+                .apply();
+    }
+
     private void switchFragmentToLogOut(String userName){
         //Hide the LogIn Elements
         mUserNameEditText.setVisibility(View.GONE);
@@ -112,6 +152,22 @@ public class LogInFragment extends Fragment {
         mLogInSuccessText.setText(successMessage);
         mLogInSuccessCard.setVisibility(View.VISIBLE);
         mLogOutButton.setVisibility(View.VISIBLE);
+    }
+    private JSONObject getUserProfile(){
+        API api = new API();
+        try {
+            return api.getVerified("userprofiles", getAuthentication());
+        }
+        catch (IOException e){
+            Log.e("getting User Profile", "error");
+        }
+        return new JSONObject();
+    }
+
+    private String getAuthentication(){
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.loggedInUser), Context.MODE_APPEND);
+        return sharedPref.getString("authentication", "null");
     }
 
     private boolean authenticateUser(String userName, String password){
@@ -127,6 +183,7 @@ public class LogInFragment extends Fragment {
 
         //Log.e(TAG,profile.toString());
         String as = String.valueOf(authenticationStatus);
+        mLogInLoadingPanel.setVisibility(View.GONE);
         return authenticationStatus;
     }
 
