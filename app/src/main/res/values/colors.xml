@@ -6,10 +6,10 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#d9d8ba</color>
     <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#bff0e7</color>
-    <color name="yes">#30A591</color>
-    <color name="no">#FF715B</color>
-    <color name="skip">#FFCE5B</color>
+    <color name="colorAccent">#BFF0CF</color>
+    <color name="yes">#7addcd</color>
+    <color name="no">#ff8d7b</color>
+    <color name="skip">#ffe19c</color>
     <color name="grey">#808080</color>
 
 </resources>
