@@ -72,12 +72,18 @@ public class ConfirmArticleFragment extends Fragment {
                 getString(R.string.locallyStoredArticle), Context.MODE_APPEND);
         final String title = sharedPref.getString("title", "null");
         final String body = sharedPref.getString("body", "null");
-        final String image = sharedPref.getString("image", "null");
+        final String image = sharedPref.getString("image", "");
 
         //Display the Image for this Article
         mConfirmArticleImageView = (ImageView) rootView.findViewById(R.id.confirm_article_image_view);
+        if (!(image.equals(""))){
         new DownloadImageTask(mConfirmArticleImageView)
-                .execute(image);
+                .execute(image);}
+        else {
+            mConfirmArticleImageView.setImageResource(R.drawable.stock_photo);
+            mConfirmArticleImageView.setVisibility(View.VISIBLE);
+            mConfirmArticleLoadingPanel.setVisibility(View.GONE);
+        }
 
         mArticleToConfirmTitleTextView = (TextView) rootView.findViewById(R.id.article_to_confirm_title);
         mArticleToConfirmTitleTextView.setText(title);
@@ -91,25 +97,23 @@ public class ConfirmArticleFragment extends Fragment {
         mConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /* ------------  TO DO     -----------------
-                Create new Article Object
-                Connect to Server
-                Save to DB
-                 */
+
+                //Create New Article
                 Article articleForDB = new Article();
                 articleForDB.setTitle(title);
                 articleForDB.setContent(body);
                 articleForDB.setImage(image);
+                //Save Article In DB
                 AsyncTask paTask = new PostArticleTask(articleForDB);
                 paTask.execute();
                 Toast.makeText(getActivity(),"Article saved to Database", Toast.LENGTH_SHORT).show();
                 clearFromSharedPreferences();
                 //----------Return to Home Fragment---------------------//
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                HomeFragment homeFrag = new HomeFragment();
-                fragmentTransaction.replace(R.id.container_body,homeFrag);
-                fragmentTransaction.commit();
+                //FragmentManager fragmentManager = getFragmentManager();
+                //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                //HomeFragment homeFrag = new HomeFragment();
+                //fragmentTransaction.replace(R.id.container_body,homeFrag);
+                //fragmentTransaction.commit();
 
             }
         });
@@ -130,8 +134,6 @@ public class ConfirmArticleFragment extends Fragment {
 
             }
         });
-
-
 
         // ---------------------- DISCARD BUTTON ------------------------------------------//
         mDiscardButton = (Button) rootView.findViewById(R.id.confirm_article_discard_button);
@@ -185,6 +187,12 @@ public class ConfirmArticleFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s){
+            //----------Return to Home Fragment---------------------//
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            HomeFragment homeFrag = new HomeFragment();
+            fragmentTransaction.replace(R.id.container_body,homeFrag);
+            fragmentTransaction.commit();
             String x = s;
 
         }

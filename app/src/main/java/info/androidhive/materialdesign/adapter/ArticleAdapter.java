@@ -54,10 +54,22 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         //Load Image into View
         ImageView article_image_view = (ImageView) articleView.findViewById(R.id.article_image);
-        new DownloadImageTask(article_image_view, mArticleLoadingPanel)
-                .execute(imageUrlString);
+        if (!(imageUrlString.equals(""))){
+            mArticleLoadingPanel.setVisibility(View.VISIBLE);
+            new DownloadImageTask(article_image_view, mArticleLoadingPanel)
+                .execute(imageUrlString);}
+        else {
+            article_image_view.setImageResource(R.drawable.stock_photo);
+            article_image_view.setVisibility(View.VISIBLE);
+        }
 
         return articleView;
+    }
+
+    //This override allows us to display articles in reverse chronological order
+    @Override
+    public Article getItem(int position) {
+        return super.getItem(super.getCount() - position - 1);
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {

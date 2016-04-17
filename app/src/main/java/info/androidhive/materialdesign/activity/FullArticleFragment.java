@@ -56,8 +56,14 @@ public class FullArticleFragment extends Fragment {
         //Display the Image for this Article
         String ourImageUrlString = ourArticle.getImage();
         mSelectedArticleImageView = (ImageView) rootView.findViewById(R.id.full_article_image_view);
+        if (!(ourImageUrlString.equals(""))){
         new DownloadImageTask(mSelectedArticleImageView)
-                .execute(ourImageUrlString);
+                .execute(ourImageUrlString);}
+        else{
+            mSelectedArticleImageView.setImageResource(R.drawable.stock_photo);
+            mSelectedArticleImageView.setVisibility(View.VISIBLE);
+            mSelectedArticleLoadingPanel.setVisibility(View.GONE);
+        }
         //Display the Title
         String ourTitle = ourArticle.getTitle();
         mSelectedArticleTitleView = (TextView) rootView.findViewById(R.id.full_article_title);

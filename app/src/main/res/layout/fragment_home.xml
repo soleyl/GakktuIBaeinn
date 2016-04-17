@@ -39,6 +39,7 @@
             android:layout_height="75dp"
             android:id="@+id/survey_icon_image"
             android:src="@drawable/survey_icon"
+            android:clickable="true"
             android:layout_margin="5dp"
             />
         <TextView
@@ -48,6 +49,7 @@
             android:textSize="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:clickable="true"
             android:gravity="center"
             android:id="@+id/announcement1"
             android:layout_below="@id/horizontal_line_1"
@@ -74,6 +76,7 @@
         android:layout_height="75dp"
         android:id="@+id/news_icon_image"
         android:src="@drawable/news_icon"
+        android:clickable="true"
         android:layout_margin="5dp"
         />
 
@@ -91,6 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:clickable="true"
             android:gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
@@ -101,6 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:clickable="true"
             android:layout_below="@id/static_announcement_2"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"

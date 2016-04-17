@@ -15,7 +15,6 @@
         android:layout_height="100dp"
         android:id="@+id/full_article_image_view"
         android:visibility="gone"
-        android:src="@drawable/loading"
         android:layout_margin="5dp"/>
 
         <!-- Spinning Icon Animation while Image is Loading -->

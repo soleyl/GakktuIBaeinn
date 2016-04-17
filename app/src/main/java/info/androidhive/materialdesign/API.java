@@ -21,11 +21,20 @@ public class API {
             = MediaType.parse("application/json; charset=utf-8");
 
 
-    Response run(String url, String authentication) throws IOException {
+    Response run(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        Log.e("our request", request.toString());
+        return client.newCall(request).execute();
+    }
+
+    Response runVerified(String url, String authentication) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
                 .header("Authorization", authentication)
                 .build();
+        Log.e("our request", request.toString());
         return client.newCall(request).execute();
     }
 
@@ -43,16 +52,30 @@ public class API {
 
     public static Boolean verifyUser(String user, String password) throws IOException{
         API api = new API();
-        Response response = api.run(Utils.url() + "/userprofiles", Credentials.basic(user, password));
+        Response response = api.runVerified(Utils.url() + "/userprofiles", Credentials.basic(user, password));
         int answer = response.code();
         Log.e("code Status", String.valueOf(answer));
         return response.code()==200;
     }
 
 
-    public static JSONObject get(String objectType, String authentication) throws IOException{
+    public static JSONObject get(String objectType) throws IOException{
         API api = new API();
-        Response response = api.run(Utils.url() +"/" + objectType, authentication);
+        Response response = api.run(Utils.url() +"/" + objectType);
+        JSONObject responseJSON = new JSONObject();
+        try{
+            responseJSON = new JSONObject(response.body().string());
+        }
+        catch(JSONException j){
+            Log.e("errorInGet", j.toString());
+        }
+
+        return responseJSON;
+    }
+
+    public static JSONObject getVerified(String objectType, String authentication) throws IOException{
+        API api = new API();
+        Response response = api.runVerified(Utils.url() +"/" + objectType, authentication);
         JSONObject responseJSON = new JSONObject();
         try{
             responseJSON = new JSONObject(response.body().string());
@@ -72,6 +95,6 @@ public class API {
         String json = Utils.finalizedJsonString(
                 Utils.setKeyValuePair("title", titleData)
                         + "," + Utils.setKeyValuePair("content", contentData));
-        return api.post(Utils.url() + "/articles/", json, authentication);
+        return api.post(Utils.url() + "/articles", json, authentication);
     }
 }

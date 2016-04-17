@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             //return new ArticleFetcher().fetchArticles();
             JSONObject articlesJSON = new JSONObject();
             try{
-                articlesJSON = API.get("articles", getAuthentication());
+                articlesJSON = API.get("articles");
             }
             catch(IOException e){
                 Log.e("error", "fetching articles");
