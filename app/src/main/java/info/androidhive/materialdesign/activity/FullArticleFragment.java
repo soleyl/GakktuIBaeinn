@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -97,6 +99,8 @@ public class FullArticleFragment extends Fragment {
         mSelectedArticleContentView.setMovementMethod(new ScrollingMovementMethod());
         mSelectedArticleContentView.setText(ourContent);
 
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle("Articles");
 
         // Inflate the layout for this fragment
         return rootView;

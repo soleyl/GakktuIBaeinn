@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +69,7 @@ public class WriteArticleFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         ConfirmArticleFragment confirmFrag = new ConfirmArticleFragment();
-        fragmentTransaction.replace(R.id.container_body,confirmFrag);
+        fragmentTransaction.replace(R.id.container_body,confirmFrag).addToBackStack("tag");
         fragmentTransaction.commit();
 
     }
@@ -131,10 +133,15 @@ public class WriteArticleFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 HomeFragment homeFrag = new HomeFragment();
-                fragmentTransaction.replace(R.id.container_body,homeFrag);
+                fragmentTransaction.replace(R.id.container_body,homeFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Home");
             }
         });
+
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle("Write An Article");
 
         // Inflate the layout for this fragment
         return rootView;

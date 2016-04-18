@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -168,12 +170,15 @@ public class SurveyFragment extends Fragment {
         mEndOfSurveyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mCurrentIndex=0;
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 ProfileFragment profileFrag = new ProfileFragment();
 
-                fragmentTransaction.replace(R.id.container_body,profileFrag);
+                fragmentTransaction.replace(R.id.container_body,profileFrag).addToBackStack("tag");
                 fragmentTransaction.commit();
+                ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+                actionBar.setTitle("Profile");
 
             }
         });
@@ -181,6 +186,8 @@ public class SurveyFragment extends Fragment {
 
         //After setup, display the first question
         updateQuestion();
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle("Survey");
 
         // Inflate the layout for this fragment
         return rootView;

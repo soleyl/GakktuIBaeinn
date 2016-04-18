@@ -12,7 +12,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -117,8 +119,6 @@ public class FragmentDrawer extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         recyclerView = (RecyclerView) layout.findViewById(R.id.drawerList);
         mLoggedInUserTextView = (TextView) layout.findViewById(R.id.user_logged_in_status_text_view);
-        //mLoggedInUserImage = (ImageView) layout.findViewById(R.id.user_profile_image);
-        //mLoggedInUserImage = (CircleImageView) layout.findViewById(R.id.user_profile_image);
 
         mLoggedInUserImage = (de.hdodenhof.circleimageview.CircleImageView) layout.findViewById(R.id.user_profile_image);
 

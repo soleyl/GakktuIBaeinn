@@ -102,6 +102,9 @@
     <string name="profile_title_text">YOUR PROFILE</string>
     <string name="user_pref_children_label_text">Children:</string>
     <string name="user_profile">UserProfile</string>
+    <string name="profile_intro_text">All content will be filtered based on these attributes:</string>
+
+    profile_intro_text
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

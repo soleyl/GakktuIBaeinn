@@ -154,6 +154,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle("Home");
+
 
         // Inflate the layout for this fragment
         return rootView;

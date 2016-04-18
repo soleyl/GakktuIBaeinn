@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,6 +86,9 @@ public class ProfileFragment extends Fragment {
         updateProfileSlot(mEmployedSlot,employedScore, "Employment");
         updateProfileSlot(mDisabilitySlot,disabledScore, "Disability");
         updateProfileSlot(mCitizenshipSlot,citizenshipScore, "Citizenship");
+
+        ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle("Profile");
 
         //Inflate the layout for this fragment
         return rootView;
