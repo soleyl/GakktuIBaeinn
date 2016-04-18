@@ -2,6 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+    <item
+        android:id="@+id/action_cache"
+        android:title="@string/action_cache"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_cached_white_18dp"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_search"

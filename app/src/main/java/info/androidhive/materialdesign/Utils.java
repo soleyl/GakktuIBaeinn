@@ -14,7 +14,7 @@ import info.androidhive.materialdesign.model.Article;
 public class Utils {
     public static String url(){
         //This is where we should store our ngrok address for now
-        return "http://1429e28e.ngrok.io";
+        return "http://864bbb48.ngrok.io";
     }
 
     public static String setKeyValuePair(String key, String value){

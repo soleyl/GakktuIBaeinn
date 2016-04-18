@@ -92,9 +92,11 @@ public class API {
         API api = new API();
         String titleData = article.getTitle();
         String contentData = article.getContent();
+        String imageData = article.getImage();
         String json = Utils.finalizedJsonString(
                 Utils.setKeyValuePair("title", titleData)
-                        + "," + Utils.setKeyValuePair("content", contentData));
-        return api.post(Utils.url() + "/articles", json, authentication);
+                        + "," + Utils.setKeyValuePair("content", contentData)+","+
+                        Utils.setKeyValuePair("image", imageData));
+        return api.post(Utils.url() + "/articles/", json, authentication);
     }
 }

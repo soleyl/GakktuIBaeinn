@@ -160,7 +160,7 @@ public class LogInFragment extends Fragment {
     private JSONObject getUserProfile(){
         API api = new API();
         try {
-            return api.getVerified("userprofiles", getAuthentication());
+            return api.getVerified("myuserprofile", getAuthentication());
         }
         catch (IOException e){
             Log.e("getting User Profile", "error");

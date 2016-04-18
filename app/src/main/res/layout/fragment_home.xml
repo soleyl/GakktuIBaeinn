@@ -106,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:textStyle="italic"
             android:clickable="true"
             android:layout_below="@id/static_announcement_2"
             android:layout_marginTop="5dp"

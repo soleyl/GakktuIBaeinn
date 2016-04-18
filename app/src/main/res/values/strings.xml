@@ -77,7 +77,7 @@
     <string name="hint_article_body">Your Content Here</string>
     <string name="hint_article_image_URL">Your Image URL Here</string>
     <string name="article_category_instructions_text">Categorize Your Article:</string>
-
+    <string name="action_cache">Cache</string>
 
     <!-- Strings for Mentor Fragment -->
     <string name="default_mentor_message">Messaging not available yet</string>

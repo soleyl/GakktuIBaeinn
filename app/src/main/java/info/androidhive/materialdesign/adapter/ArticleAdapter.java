@@ -65,12 +65,13 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
         return articleView;
     }
-
+    /*
     //This override allows us to display articles in reverse chronological order
     @Override
     public Article getItem(int position) {
         return super.getItem(super.getCount() - position - 1);
     }
+    */
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;

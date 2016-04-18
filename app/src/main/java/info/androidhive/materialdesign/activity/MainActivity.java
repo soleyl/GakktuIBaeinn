@@ -123,6 +123,44 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     }
 
+
+    private class CacheArticlesTask extends AsyncTask<Object, Void, List<Article>>{
+
+        @Override
+        protected List<Article> doInBackground(Object... params){
+            JSONObject articlesJSON = new JSONObject();
+            try{
+                articlesJSON = API.get("articles");
+            }
+            catch(IOException e){
+                Log.e("error", "fetching articles");
+            }
+            List<Article> articles = new ArrayList<>();
+            try{
+                articles = Utils.parseArticles(articlesJSON);
+            }
+            catch(JSONException je){
+                Log.e(TAG, "Failed to parse JSON", je);
+            }
+            return articles;
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Article> articles){
+            mArticles = articles;
+            ArticleFragment newFrag = new ArticleFragment();
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction fragTrans = manager.beginTransaction();
+            fragTrans.replace(android.R.id.content,newFrag,"Articles");
+
+
+
+        }
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //Update the Displayed UserName, if User is Logged in
@@ -202,6 +240,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
             return true;
         }
+        if(id == R.id.action_cache){
+            Toast.makeText(getApplicationContext(), "Refreshing now...", Toast.LENGTH_SHORT).show();
+            AsyncTask task2 = new CacheArticlesTask();
+            task2.execute();
+
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -261,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack("tag");
+            fragmentTransaction.replace(R.id.container_body, fragment).addToBackStack(title);
             fragmentTransaction.commit();
 
             // set the toolbar title
