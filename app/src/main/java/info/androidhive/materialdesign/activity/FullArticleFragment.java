@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import info.androidhive.materialdesign.API;
 import info.androidhive.materialdesign.R;
+import info.androidhive.materialdesign.Utils;
 import info.androidhive.materialdesign.model.Article;
 
 /**
@@ -33,6 +42,8 @@ public class FullArticleFragment extends Fragment {
     TextView mSelectedArticleDate;
     ImageView mSelectedArticleImageView;
     View mSelectedArticleLoadingPanel;
+    String mAuthorNameString;
+    String mArticlePublishDate;
 
     public FullArticleFragment() {
         // Required empty public constructor
@@ -54,9 +65,20 @@ public class FullArticleFragment extends Fragment {
         final int articleSelected = sharedPref.getInt("articleSelected", 0);
         Article ourArticle= ((MainActivity) getActivity()).getArticle(articleSelected);
 
-        mSelectedArticleLoadingPanel = rootView.findViewById(R.id.loadingPanel);
-        //Display the Image for this Article
+        //Parse Data from the Article
+        String ourAuthor = ourArticle.getAuthor();
         String ourImageUrlString = ourArticle.getImage();
+        String ourTitle = ourArticle.getTitle();
+        String ourContent = ourArticle.getContent();
+        mArticlePublishDate = ourArticle.getOriginalDate();
+
+        //Make server call to get String Value/Name of Author
+        AsyncTask task = new GetAuthorNameTask(ourAuthor);
+        task.execute();
+
+        //Display the Image for this Article
+        mSelectedArticleDate = (TextView) rootView.findViewById(R.id.full_article_date);
+        mSelectedArticleLoadingPanel = rootView.findViewById(R.id.loadingPanel);
         mSelectedArticleImageView = (ImageView) rootView.findViewById(R.id.full_article_image_view);
         if (!(ourImageUrlString.equals(""))){
         new DownloadImageTask(mSelectedArticleImageView)
@@ -66,24 +88,58 @@ public class FullArticleFragment extends Fragment {
             mSelectedArticleImageView.setVisibility(View.VISIBLE);
             mSelectedArticleLoadingPanel.setVisibility(View.GONE);
         }
+
         //Display the Title
-        String ourTitle = ourArticle.getTitle();
         mSelectedArticleTitleView = (TextView) rootView.findViewById(R.id.full_article_title);
         mSelectedArticleTitleView.setText(ourTitle);
         //Display the Content
-        String ourContent = ourArticle.getContent();
         mSelectedArticleContentView = (TextView) rootView.findViewById(R.id.full_article_content);
         mSelectedArticleContentView.setMovementMethod(new ScrollingMovementMethod());
         mSelectedArticleContentView.setText(ourContent);
-        //Display the Author
-        String ourAuthor = ourArticle.getAuthor();
-        String ourDate = ourArticle.getOriginalDate();
-        mSelectedArticleDate = (TextView) rootView.findViewById(R.id.full_article_date);
-        mSelectedArticleDate.setText("Published on " + ourDate + " by " + ourAuthor);
+
 
         // Inflate the layout for this fragment
         return rootView;
     }
+
+    private class GetAuthorNameTask extends AsyncTask<Object, Void, String>{
+        private String authorInt;
+
+        public GetAuthorNameTask(String authorInt) {
+            this.authorInt=authorInt;
+        }
+
+        @Override
+        protected String doInBackground(Object... params){
+            String authorNameString="horseShit";
+            JSONObject authorJSON = new JSONObject();
+            String url="users/"+ authorInt;
+            try{
+                authorJSON = API.get(url);
+            }
+            catch(IOException e){
+                Log.e("error", "fetching articles");
+            }
+
+            try{
+                authorNameString=authorJSON.getString("username");
+            }
+            catch(JSONException je){
+                Log.e("getAuthorName", "Failed to parse JSON", je);
+            }
+            mAuthorNameString=authorNameString;
+            return authorNameString;
+
+        }
+
+        @Override
+        protected void onPostExecute(String authorNameString){
+            String fullString = "Published on " + mArticlePublishDate + " by " + mAuthorNameString;
+            mSelectedArticleDate.setText(fullString);
+        }
+
+    }
+
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;

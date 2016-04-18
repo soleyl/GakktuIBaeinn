@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         @Override
         protected List<Article> doInBackground(Object... params){
-            //return new ArticleFetcher().fetchArticles();
             JSONObject articlesJSON = new JSONObject();
             try{
                 articlesJSON = API.get("articles");
@@ -118,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         @Override
         protected void onPostExecute(List<Article> articles){
             mArticles = articles;
-            Log.e("heytroy", "data is here");
             displayView(0);
 
         }
@@ -141,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
         else {
             userNameTextView.setText(R.string.not_logged_in_text);
-            //userImageView.setImageResource(R.drawable.ic_profile);
             userImageView.setImageResource(R.drawable.blueman);
         }
 
