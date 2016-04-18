@@ -90,28 +90,26 @@
             <!-- Confirmation Message for Successful LogIN -->
             <!-- These elements will be hidden until the User Logs in -->
             <android.support.v7.widget.CardView
-                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/log_in_success_confirmation_card_view"
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
                 android:visibility="gone"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                card_view:cardCornerRadius="10dp"
-                android:layout_below="@id/label"
-                card_view:cardBackgroundColor="@color/colorAccent">
+                android:layout_below="@id/label">
                 <TextView
-                    android:layout_centerInParent="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
+                    android:layout_height="85dp"
+                    android:paddingLeft="100dp"
                     android:id="@+id/log_in_success_confirmation_text"
-                    android:text="LogIn Success" />
+                    android:text="LogIn Success"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/textColorPrimary"
+                    android:textSize="23dp"
+                    android:background="@color/yes"/>
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/hello"/>
             </android.support.v7.widget.CardView>
             <Button
                 android:id="@+id/log_out_button"
