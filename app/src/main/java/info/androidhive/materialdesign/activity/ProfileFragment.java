@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.app.Activity;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,11 @@ import java.util.List;
 import info.androidhive.materialdesign.R;
 
 public class ProfileFragment extends Fragment {
+
+    private TextView mChildrenSlot;
+    private TextView mEmployedSlot;
+    private TextView mDisabilitySlot;
+    private TextView mCitizenshipSlot;
 
     private String[] profileLabels = new String[] {
             "Children:",
@@ -61,16 +68,45 @@ public class ProfileFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        GridView profileGrid;
+        mChildrenSlot = (TextView) rootView.findViewById(R.id.children_text_view);
+        mEmployedSlot = (TextView) rootView.findViewById(R.id.employed_text_view);
+        mDisabilitySlot = (TextView) rootView.findViewById(R.id.disability_text_view);
+        mCitizenshipSlot = (TextView) rootView.findViewById(R.id.citizenship_text_view);
 
-        profileGrid = (GridView) rootView.findViewById(R.id.profile_grid);
+        SharedPreferences sharedPref = getActivity().getSharedPreferences(
+                getString(R.string.userProfilePreferences), Context.MODE_APPEND);
+        int childScore = sharedPref.getInt("Children:", 1);
+        int employedScore = sharedPref.getInt("Employed:", 1);
+        int disabledScore = sharedPref.getInt("Disability:", 1);
+        int citizenshipScore = sharedPref.getInt("Citizenship:", 1);
 
-        gatherProfileData();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, profileData);
-        profileGrid.setAdapter(adapter);
+        updateProfileSlot(mChildrenSlot,childScore, "Children");
+        updateProfileSlot(mEmployedSlot,employedScore, "Employment");
+        updateProfileSlot(mDisabilitySlot,disabledScore, "Disability");
+        updateProfileSlot(mCitizenshipSlot,citizenshipScore, "Citizenship");
 
         //Inflate the layout for this fragment
         return rootView;
+    }
+
+    private void updateProfileSlot(TextView view, int score, String topic) {
+        String statement="";
+        if (score == 0) {
+            statement += topic + " is not a topic of interest for you.";
+            view.setBackgroundColor(getResources().getColor(R.color.no));
+            view.setText(statement);
+
+        }
+        if (score==1){
+            statement = "Your interest in "+ topic + " is not known.";
+            view.setBackgroundColor(getResources().getColor(R.color.skip));
+            view.setText(statement);
+        }
+        if (score==2){
+            statement = topic + " is a topic of interest to you.";
+            view.setBackgroundColor(getResources().getColor(R.color.yes));
+            view.setText(statement);
+        }
     }
 
 
